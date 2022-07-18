@@ -73,9 +73,16 @@
 }
 
 .backlog {
-    border-left: 10px solid grey;
+    border-left: 10px solid #D3D2FF;
 }
 
 .to-do {
     border-left: 10px solid #fae73c;
+}
+
+/* footer */
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }

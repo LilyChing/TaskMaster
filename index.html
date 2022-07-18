@@ -15,13 +15,7 @@
     <!-- Our own CSS -->
     <link rel="stylesheet" href="./style.css">
     <title>Document</title>
-    <style>
-        .footer {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-    </style>
+    
 </head>
 
 <body>
@@ -48,11 +42,18 @@
                             data-toggle="dropdown" aria-expanded="false">
                             Project
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">A</a>
-                            <a class="dropdown-item" href="#">B</a>
-                            <a class="dropdown-item" href="#">C</a>
-                        </div>
+                        <ul class="dropdown-menu">
+                            <li><h4 class="dropdown-header">User's Team</h4></li>
+                            <li><a class="dropdown-item" href="#">Success</a></li>
+                            <li><a class="dropdown-item" href="#">Peace</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <h4 class="dropdown-header">Personal</h4></li>
+                            <li><a class="dropdown-item" href="#">Main</a></li>
+                            <li><a class="dropdown-item" href="#">Secondary</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <h4 class="dropdown-header">Other</h4></li>
+                            <li><a class="dropdown-item" href="#">Add project</a></li>
+                        </ul>
                     </li>
                     <form class="form-inline order-lg-last nameplace">
                         <li class="nav-item d-flex align-items-center teamplace" style="display: none !important; ">
