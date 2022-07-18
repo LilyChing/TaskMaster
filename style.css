@@ -5,3 +5,18 @@
     border: 2px solid red;
     border-radius: 5px;
 }
+
+/* reset bootstrap row and col spacing  */
+.row {
+    margin: 0;
+}
+
+[class^="col-"] {
+    margin: 0;
+    padding: 0;
+}
+
+/* style for modal popup */
+.modal-header {
+    padding: 0.75rem;
+}
