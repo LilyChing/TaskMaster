@@ -45,12 +45,13 @@ function logined(){
     teamPlace.style.display = "block";
     userPlace.style.display = "block";
     const teamName = document.querySelector(".teamname");
-    teamName.innerHTML = `${sessionStorage.getItem("username")}'s Team`
+    teamName.innerHTML = `${sessionStorage.getItem("username")}'s Team`;
+    document.getElementById("memListTop").innerHTML = `${sessionStorage.getItem("username")}`;
     const logoutbtn = document.querySelector(".logout");
     logoutbtn.setAttribute("type","button");
     logoutbtn.onclick = function() {
         alert("Logout successfully");
-        sessionStorage.clear();
+        sessionStorage.removeItem("username");;
         location.reload();
     };
 }

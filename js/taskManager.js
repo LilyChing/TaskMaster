@@ -8,7 +8,9 @@ const descriptionInput = document.getElementById("description");
 const dueDateInput = document.getElementById("due");
 const assigneeInput = document.getElementById("select-assignee");
 const statusInput = document.getElementById("status");
-
+const memInput = document.getElementById("newMem");
+const memBtn = document.getElementById("addMem");
+const memPlace = document.getElementById("memplace");
 
 // main class for task management
 class TaskManager {
@@ -40,7 +42,23 @@ class TaskManager {
         newElement.innerHTML = `<div class="card-body"><div class="row h6 justify-content-between mb-2"><div class="task-title col-11 row flex-wrap">${task.summary}</div><span class="col-1 text-right"><i class="fa-solid fa-xmark"></i></span></div><span class="project-name bg-primary p-1">${task.project}</span><div class="row justify-content-between mt-2"><span class="assignee"><i class="fa-solid fa-circle-user"></i> ${task.assignee}</span><span class="due-date">due: ${task.dueDate}</span></div></div>`
         document.querySelector(`.${task.status}Col`).appendChild(newElement);
     }
-
+    addMem(newmem){
+        const colorList = ["red","gray","blue","green","pink","Orange","Aqua","Purple"];
+        const ranColor = Math.floor(Math.random()*colorList.length);
+        const newMemGroup = {};
+        newMemGroup.color = colorList[ranColor];
+        newMemGroup.member = newmem;
+        this.team.push(newMemGroup);
+        this.renderMem(newMemGroup);
+    }
+    renderMem(mem){
+            const newElement = document.createElement("div");
+            newElement.setAttribute("class","row mb-2 memList");
+            newElement.innerHTML = `<div class="rounded-circle mr-2" style="height: 40px;width: 40px;background-color:${mem.color};"></div>
+            <div id="memListTop">${mem.member}</div>
+            <div class="col-sm-2 text-center">Editor</div>`;
+            memPlace.appendChild(newElement);
+    }
 }
 
 
@@ -57,4 +75,12 @@ createBtn.addEventListener("click", event => {
         input.value = "";
     }
     console.log(manager.tasks);
+});
+
+//set click listener for add member button
+memBtn.addEventListener("click", function() {
+    alert("Add member successfully");
+    manager.addMem(memInput.value);
+    memInput.value ="";
+    console.log(manager.team);
 });

@@ -1,5 +1,5 @@
 /* nav bar style */
-.nameplace {
+.nameplace,.memList div:last-child {
     margin-left: auto;
 }
 
@@ -78,4 +78,8 @@
 
 .to-do {
     border-left: 10px solid #fae73c;
+}
+ /* add team's member Modal */
+.memList{
+    align-items: center;
 }

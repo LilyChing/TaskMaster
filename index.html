@@ -55,16 +55,53 @@
                         </div>
                     </li>
                     <form class="form-inline order-lg-last nameplace">
-                        <li class="nav-item d-flex align-items-center teamplace" style="display: none !important; ">
-                            <span class="navbar-text mr-3 teamname">testing</span>
-                            <div class="rounded-circle bg-success" style="height: 40px;width: 40px;"></div>
-                            <div class="rounded-circle bg-warning" style="height: 40px;width: 40px;position: relative;
-                            left: -15px;"></div>
-                            <div class="rounded-circle bg-danger" style="height: 40px;width: 40px;position: relative;
-                            left: -30px;"></div>
-                            <a class="nav-link p-0" href="#" style="font-size: 30px;position: relative;
-                            left: -15px;">+</a>
+                    <div class="teamplace d-flex" style="display: none !important;">
+                        <li><span class="navbar-text mr-3 teamname">Guest</span></li>
+                        <li class="nav-item  d-flex align-items-center" style="position: relative !important;width: 90px;">
+                                <div class="rounded-circle bg-success" style="height: 40px;width: 40px; z-index: 4;"></div>
+                                <div class="rounded-circle bg-warning" style="height: 40px;width: 40px;position: absolute;left: 15px;z-index: 3;"></div>
+                                <div class="rounded-circle bg-danger" style="height: 40px;width: 40px;position: absolute;left: 30px;z-index: 2;"></div>
+                                <div class="rounded-circle bg-secondary" style="height: 40px;width: 40px;position: absolute;left: 45px;"></div>
                         </li>
+                        <li>
+                            <button type="button" class="btn p-0" data-toggle="modal" data-target="#teamModal" style="font-size: 30px;">
+                                +
+                            </button>
+                            <!-- add team's member Modal -->
+                                <div class="modal fade" id="teamModal" tabindex="-1" aria-labelledby="teamModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                        <h5 class="modal-title" id="teamModalLabel">Add Team member</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        </div>
+                                        <div class="modal-body" id="memplace">
+                                            <div class="row mb-4 input-group" >
+                                                <input type="text" class=" form-control" id="newMem" placeholder="Add user into your team..." aria-describedby="button-addon">
+                                                <div class="input-group-append">
+                                                <button type="button" class="btn mb-1 mb-sm-0 px-4 py-0" id="addMem" style="font-size: 30px;">
+                                                    +
+                                                </button>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-2 memList" >
+                                                <div class="rounded-circle bg-info mr-2" style="height: 40px;width: 40px;"></div>
+                                                <div id="memListTop">Guest</div>
+                                                <div class="col-sm-2 text-center">Owner</div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer justify-content-between">
+                                        <button type="button" class="btn btn-secondary rounded-pill">Share link</button>
+                                        <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal">Done</button>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            <!-- End of team's member Modal -->
+                        </li>
+                        </div>
                         <li class="nav-item dropdown ml-5 userplace" style="display: none !important; ">
                             <div class="rounded-circle bg-info d-flex align-items-center justify-content-center"
                                 style="height: 50px;width: 50px;" id="userMenuLink" role="button" data-toggle="dropdown"
