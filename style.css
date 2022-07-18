@@ -73,7 +73,7 @@
 }
 
 .backlog {
-    border-left: 10px solid grey;
+    border-left: 10px solid #D3D2FF;
 }
 
 .to-do {
@@ -83,3 +83,11 @@
 .memList{
     align-items: center;
 }
+
+/* footer */
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
