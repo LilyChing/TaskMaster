@@ -31,7 +31,7 @@
             style="background: linear-gradient(#A8BBFF,#D3D2FF);">
             <div>
                 <a class="navbar-brand" href="#">
-                <img src="./image/12.png" height=50px>TaskMaster
+                    <img src="./image/12.png" height=50px>TaskMaster
                 </a>
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
@@ -66,8 +66,9 @@
                             left: -15px;">+</a>
                         </li>
                         <li class="nav-item dropdown ml-5 userplace" style="display: none !important; ">
-                            <div class="rounded-circle bg-info d-flex align-items-center justify-content-center" style="height: 50px;width: 50px;" id="userMenuLink" role="button"
-                            data-toggle="dropdown" aria-expanded="false">You</div>
+                            <div class="rounded-circle bg-info d-flex align-items-center justify-content-center"
+                                style="height: 50px;width: 50px;" id="userMenuLink" role="button" data-toggle="dropdown"
+                                aria-expanded="false">You</div>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userMenuLink">
                                 <a class="dropdown-item" href="#">My Profile</a>
                                 <a class="dropdown-item" href="#">Setting</a>
@@ -75,8 +76,8 @@
                             </div>
                         </li>
                         <li class="loginplace nav-item">
-                            <button class="btn btn-outline-secondary mr-3 rounded-pill" type="button" data-toggle="modal"
-                                data-target="#loginModal">Log in</button>
+                            <button class="btn btn-outline-secondary mr-3 rounded-pill" type="button"
+                                data-toggle="modal" data-target="#loginModal">Log in</button>
                             <button class="btn btn-outline-secondary rounded-pill" type="button">Sign up</button>
                         </li>
                     </form>
@@ -86,48 +87,51 @@
     </header>
     <!-- navbar end -->
     <!-- The login Modal -->
-	<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="ModalLabel">Log in</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<!-- Modal Content -->
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ModalLabel">Log in</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!-- Modal Content -->
                 <form method="post" class="login">
-				<div class="modal-body">
-						<div class="md-form mt-2 mb-3">
-							<label for="uname"><b>Username</b></label>
-							<input type="text" placeholder="Enter Username" name="uname" class="form-control validate"
-								id="checkuname">
-						</div>
-						<div class="md-form mb-1">
-							<label for="pw"><b>Password</b></label>
-							<input type="password" placeholder="Enter Password" name="pw" class="form-control validate"
-								id="checkpw" required>
-						</div>
-						<div class="md-form mb-4">
-							<label>
-								<input type="checkbox" checked="checked" name="remember"> Remember me
-							</label>
-							<p id="warning" class="text-danger">The correct password is taskmaster</p>
-						</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-outline-secondary rounded-pill" data-dismiss="modal">Close</button>
-					<button type="submit" class="btn btn-outline-secondary rounded-pill" id="loginbutton">Log in</button>
-				</div>
-				</form>
-			</div>
-		</div>
-	</div>
-	<!-- End of login Model -->
+                    <div class="modal-body">
+                        <div class="md-form mt-2 mb-3">
+                            <label for="uname"><b>Username</b></label>
+                            <input type="text" placeholder="Enter Username" name="uname" class="form-control validate"
+                                id="checkuname">
+                        </div>
+                        <div class="md-form mb-1">
+                            <label for="pw"><b>Password</b></label>
+                            <input type="password" placeholder="Enter Password" name="pw" class="form-control validate"
+                                id="checkpw" required>
+                        </div>
+                        <div class="md-form mb-4">
+                            <label>
+                                <input type="checkbox" checked="checked" name="remember"> Remember me
+                            </label>
+                            <p id="warning" class="text-danger">The correct password is taskmaster</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary rounded-pill"
+                            data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-outline-secondary rounded-pill" id="loginbutton">Log
+                            in</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- End of login Model -->
     <div class="container">
         <div class="row align-items-center">
             <p class="m-0">Project A</p>
-            <button type="button" class="btn btn-primary rounded-pill" data-toggle="modal" data-target="#createTask">Create</button>
+            <button type="button" class="btn btn-primary rounded-pill" data-toggle="modal"
+                data-target="#createTask">Create</button>
         </div>
 
         <!-- modal -->
@@ -205,22 +209,87 @@
         </div>
         <!-- end of modal -->
 
-        <div class="row">
-            <div class="col-3 border flex-column d-flex align-items-center">
+        <div class="row row1">
+            <div class="col-3 flex-column d-flex align-items-center">
+
                 <h4>Backlog</h4>
-                <div class="cardCol">a</div>
+                <div class="cardCol">
+                    <div class="myBlock">
+                        <p>a</p>
+                        <p>a</p>
+                        <p>a</p>
+                        <p>a</p>
+                        <p>a</p>
+                        <p>a</p>
+                        <p>a</p>
+                        <p>a</p>
+                        <p>a</p>
+                        <p>a</p>
+                        <p>a</p>
+                        <p>a</p>
+                        <p>a</p>
+                    </div>
+                </div>
             </div>
-            <div class="col-3 border flex-column d-flex align-items-center">
+            <div class="col-3 flex-column d-flex align-items-center">
                 <h4>To-Do</h4>
-                <div class="cardCol">a</div>
+                <div class="cardCol">
+                    <div class="myBlock">
+                        <p>a</p>
+                        <p>a</p>
+                        <p>a</p>
+                        <p>a</p>
+                        <p>a</p>
+                        <p>a</p>
+                        <p>a</p>
+                        <p>a</p>
+                        <p>a</p>
+                        <p>a</p>
+                        <p>a</p>
+                        <p>a</p>
+                        <p>a</p>
+                    </div>
+                </div>
             </div>
-            <div class="col-3 border flex-column d-flex align-items-center">
+            <div class="col-3 flex-column d-flex align-items-center">
                 <h4>Doing</h4>
-                <div class="cardCol">a</div>
+                <div class="cardCol">
+                    <div class="myBlock">
+                        <p>a</p>
+                        <p>a</p>
+                        <p>a</p>
+                        <p>a</p>
+                        <p>a</p>
+                        <p>a</p>
+                        <p>a</p>
+                        <p>a</p>
+                        <p>a</p>
+                        <p>a</p>
+                        <p>a</p>
+                        <p>a</p>
+                        <p>a</p>
+                    </div>
+                </div>
             </div>
-            <div class="col-3 border flex-column d-flex align-items-center">
+            <div class="col-3 flex-column d-flex align-items-center">
                 <h4>Done</h4>
-                <div class="cardCol">a</div>
+                <div class="cardCol">
+                    <div class="myBlock">
+                        <p>a</p>
+                        <p>a</p>
+                        <p>a</p>
+                        <p>a</p>
+                        <p>a</p>
+                        <p>a</p>
+                        <p>a</p>
+                        <p>a</p>
+                        <p>a</p>
+                        <p>a</p>
+                        <p>a</p>
+                        <p>a</p>
+                        <p>a</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -229,7 +298,7 @@
         <p>Teammate:Tony,Lily,Double.</p>
     </div>
     <footer>
-    <!-- Bootstrap JS -->
+        <!-- Bootstrap JS -->
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
             integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
             crossorigin="anonymous"></script>

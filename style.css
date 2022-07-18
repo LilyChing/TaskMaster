@@ -1,16 +1,18 @@
 /* nav bar style */
-.nameplace{
+.nameplace {
     margin-left: auto;
 }
-.teamplace .userplace{
+
+.teamplace .userplace {
     display: none;
 }
-.cardCol{
+
+.cardCol {
     min-height: 200px;
     height: 500px;
     width: 100%;
-    border: 2px solid red;
-    border-radius: 5px;
+    border: 2px solid #7F6C9D;
+    border-radius: 18px;
 }
 
 /* reset bootstrap row and col spacing  */
@@ -26,4 +28,42 @@
 /* style for modal popup */
 .modal-header {
     padding: 0.75rem;
+}
+
+/* scrollbar below */
+/* Box styles */
+.myBlock {
+    border: none;
+    padding: 5px;
+    font: 28px aerial;
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+    width: 15px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-track {
+    border: 2px solid #7F6C9D;
+    border-radius: 0 25px 25px 0;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #7F6C9D;
+    border-radius: 0 25px 25px 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #7F6C9D;
+}
+
+/* srollbar end */
+.row1 {
+    margin-top: 4%;
+    margin-bottom: 4%;
+
 }
