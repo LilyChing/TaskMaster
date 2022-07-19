@@ -41,7 +41,7 @@ class TaskManager {
         newElement.setAttribute("draggable", "true");
         newElement.setAttribute("data-toggle", "modal");
         newElement.setAttribute("data-target", "#editTask");
-        newElement.innerHTML = `<div class="card-body"><div class="row h6 justify-content-between mb-2"><div class="task-title col-11 row flex-wrap">${task.summary}</div><span class="col-1 text-right"><i class="fa-solid fa-xmark"></i></span></div><span class="project-name bg-primary p-1">${task.project}</span><div class="row justify-content-between mt-2"><span class="assignee"><i class="fa-solid fa-circle-user"></i> ${task.assignee}</span><span class="due-date">due: ${task.dueDate}</span></div></div>`
+        newElement.innerHTML = `<div class="card-body"><div class="row h6 justify-content-between mb-2"><div class="task-title col-11 row flex-wrap">${task.summary}</div><span class="col-1 text-center deleteBtn"><i class="fa-solid fa-xmark"></i></span></div><span class="project-name bg-primary p-1">${task.project}</span><div class="row justify-content-between mt-2"><span class="assignee"><i class="fa-solid fa-circle-user"></i> ${task.assignee}</span><span class="due-date">due: ${task.dueDate}</span></div></div>`
         document.getElementById(`${task.status}Col`).appendChild(newElement);
 
         // add click handler to set edit modal values
@@ -54,6 +54,22 @@ class TaskManager {
             document.getElementById("edit-assignee").value = task.assignee;
             document.getElementById("edit-status").value = task.status;
             document.getElementById("editId").value = task.id;
+        });
+
+        // add click handler to the child of Task element to "catch" delete click event
+        const deleteCatcher = document.querySelector(`#${newElement.id} .card-body`);
+        deleteCatcher.addEventListener("click", event => {
+            if (event.target === document.querySelector(`#${newElement.id} .deleteBtn`) || event.target === document.querySelector(`#${newElement.id} i`)) {
+                if (confirm("Are you sure to delete this task?")) {
+                    // delete task from manager.tasks
+                    const taskIndex = manager.tasks.indexOf(task);
+                    manager.tasks.splice(taskIndex, 1);
+                    // delete task element from DOM
+                    document.getElementById(newElement.id).remove();
+                }
+                event.stopPropagation();  // the delete click won't bubble up to the task card to trigger edit modal
+                manager.save(); // save change to local storage
+            }
         });
         
         // add drag handler
@@ -78,6 +94,9 @@ class TaskManager {
             // update the status of the dropped task object in TaskManager
             const taskId = draggedId.replace("task", "");
             manager.getTaskById(parseInt(taskId)).status = status;
+
+            // save change to local storage
+            manager.save();
 
             event.stopPropagation();  // prevent the drop event to bubble up to the parent task block
             // otherwise, the dropped task will be appended to the end, meaning the insertion is overridden 
