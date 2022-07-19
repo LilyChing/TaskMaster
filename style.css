@@ -1,5 +1,13 @@
+body {
+    background-image: url(./image/16.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+
 /* nav bar style */
-.nameplace,.memList div:last-child {
+.nameplace,
+.memList div:last-child {
     margin-left: auto;
 }
 
@@ -88,8 +96,8 @@
     border-left: 10px solid #A9ED74;
 }
 
- /* add team's member Modal */
-.memList{
+/* add team's member Modal */
+.memList {
     align-items: center;
 }
 
@@ -99,4 +107,3 @@
     bottom: 0;
     width: 100%;
 }
-
