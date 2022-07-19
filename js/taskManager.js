@@ -5,7 +5,7 @@ class TaskManager {
         this.tasks = [];
         this.currentId = 0;
         this.projects = [];
-        this.team = [];
+        this.team = [{member:"You",color:"#33b5e5"}];
         this.isLogin = false;
     }
 
