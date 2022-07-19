@@ -70,6 +70,22 @@ class TaskManager {
             document.getElementById("edit-status").value = task.status;
             document.getElementById("editId").value = task.id;
         });
+
+        // add click handler to the child of Task element to "catch" delete click event
+        const deleteCatcher = document.querySelector(`#${newElement.id} .card-body`);
+        deleteCatcher.addEventListener("click", event => {
+            if (event.target === document.querySelector(`#${newElement.id} .deleteBtn`) || event.target === document.querySelector(`#${newElement.id} i`)) {
+                if (confirm("Are you sure to delete this task?")) {
+                    // delete task from manager.tasks
+                    const taskIndex = manager.tasks.indexOf(task);
+                    manager.tasks.splice(taskIndex, 1);
+                    // delete task element from DOM
+                    document.getElementById(newElement.id).remove();
+                }
+                event.stopPropagation();  // the delete click won't bubble up to the task card to trigger edit modal
+                manager.save(); // save change to local storage
+            }
+        });
         
         // add drag handler
         newElement.addEventListener("dragstart", event => {
@@ -93,6 +109,9 @@ class TaskManager {
             // update the status of the dropped task object in TaskManager
             const taskId = draggedId.replace("task", "");
             manager.getTaskById(parseInt(taskId)).status = status;
+
+            // save change to local storage
+            manager.save();
 
             event.stopPropagation();  // prevent the drop event to bubble up to the parent task block
             // otherwise, the dropped task will be appended to the end, meaning the insertion is overridden 

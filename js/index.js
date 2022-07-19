@@ -8,7 +8,7 @@ const namePlace = document.querySelector(".nameplace");
 const teamPlace = document.querySelector(".teamplace");
 const userPlace = document.querySelector(".userplace");
 
-// input elements of "create task" modal
+// input elements of "create task" and "add memeber" modal
 const createBtn = document.getElementById("createBtn");
 const projectInput = document.getElementById("select-project");
 const summaryInput = document.getElementById("summary");
@@ -162,8 +162,10 @@ editBtn.addEventListener("click", event => {
     // re-render and re-position
     const editedElement = document.getElementById(`task${document.getElementById("editId").value}`);
     editedElement.setAttribute("class", `card ${edited.status}`);
-    editedElement.innerHTML = `<div class="card-body"><div class="row h6 justify-content-between mb-2"><div class="task-title col-11 row flex-wrap">${edited.summary}</div><span class="col-1 text-right"><i class="fa-solid fa-xmark"></i></span></div><span class="project-name bg-primary p-1">${edited.project}</span><div class="row justify-content-between mt-2"><span class="assignee"><i class="fa-solid fa-circle-user"></i> ${edited.assignee}</span><span class="due-date">due: ${edited.dueDate}</span></div></div>`
+    editedElement.innerHTML = `<div class="card-body"><div class="row h6 justify-content-between mb-2"><div class="task-title col-11 row flex-wrap">${edited.summary}</div><span class="col-1 text-center deleteBtn"><i class="fa-solid fa-xmark"></i></span></div><span class="project-name bg-primary p-1">${edited.project}</span><div class="row justify-content-between mt-2"><span class="assignee"><i class="fa-solid fa-circle-user"></i> ${edited.assignee}</span><span class="due-date">due: ${edited.dueDate}</span></div></div>`
     document.getElementById(`${edited.status}Col`).appendChild(editedElement);
+    // save change to local storage
+    manager.save();
 });
 
 
