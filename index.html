@@ -25,7 +25,7 @@
             style="background: linear-gradient(#A8BBFF,#D3D2FF);">
             <div>
                 <a class="navbar-brand" href="#">
-                    <img src="./image/12.png" height=50px>TaskMaster
+                    <img src="./image/12.png" height=60px>TaskMaster
                 </a>
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
@@ -55,7 +55,7 @@
                             <li><a class="dropdown-item" href="#">Add project</a></li>
                         </ul>
                     </li>
-                    <form class="form-inline order-lg-last nameplace ml-0 ml-sm-auto">
+                    <form class="form-inline order-lg-last nameplace ml-0 ml-lg-auto">
                     <div class="teamplace d-flex" style="display: none !important;">
                         <li><span class="navbar-text mr-3 teamname">Guest</span></li>
                         <li class="nav-item  d-flex align-items-center" style="position: relative !important;width: 90px;">
@@ -169,11 +169,11 @@
         </div>
     </div>
     <!-- End of login Model -->
-    <div class="container">
-        <div class="row align-items-center">
+    <div class="container max-width: 2000px">
+        <div class="row align-items-center mt-4">
             <p class="m-0">Project A</p>
-            <button type="button" class="btn btn-primary rounded-pill" data-toggle="modal"
-                data-target="#createTask">Create</button>
+            <button type="button" class="btn btn-primary rounded-pill ml-1" data-toggle="modal"
+                data-target="#createTask" style="background-color:#809cff; border-color:#809cff;">Create</button>
         </div>
 
         <!-- "create task" modal -->
@@ -245,8 +245,8 @@
         </div>
         <!-- end of "create task" modal -->
 
-        <div class="row row1">
-            <div class="col-3 flex-column d-flex align-items-center">
+        <div class="row row1 flex-nowrap">
+            <div class="col-3 flex-column d-flex align-items-center mx-4">
 
                 <h4>Backlog</h4>
                 <div class="cardCol">
@@ -269,21 +269,21 @@
                     </div>
                 </div>
             </div>
-            <div class="col-3 flex-column d-flex align-items-center">
+            <div class="col-3 flex-column d-flex align-items-center mx-4">
                 <h4>To-Do</h4>
                 <div class="cardCol">
                     <div class="myBlock" id="to-doCol">
                     </div>
                 </div>
             </div>
-            <div class="col-3 flex-column d-flex align-items-center">
+            <div class="col-3 flex-column d-flex align-items-center mx-4">
                 <h4>Doing</h4>
                 <div class="cardCol">
                     <div class="myBlock" id="doingCol">
                     </div>
                 </div>
             </div>
-            <div class="col-3 flex-column d-flex align-items-center">
+            <div class="col-3 flex-column d-flex align-items-center mx-4">
                 <h4>Done</h4>
                 <div class="cardCol">
                     <div class="myBlock" id="doneCol">
