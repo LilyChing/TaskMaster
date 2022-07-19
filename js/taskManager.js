@@ -6,6 +6,7 @@ class TaskManager {
         this.currentId = 0;
         this.projects = [];
         this.team = [];
+        this.isLogin = false;
     }
 
     addTask(project, summary, description, dueDate, assignee, status) {
@@ -89,14 +90,20 @@ class TaskManager {
     }
 
     save(){
-        // Store the JSON string in localStorage
+        // Store the task JSON string in localStorage
         localStorage.setItem('tasks', JSON.stringify(this.tasks));
+
+        // Store the team member JSON string in localStorage
+        localStorage.setItem('team', JSON.stringify(this.team));
 
         // Convert the currentId to a string;
         const currentId = String(this.currentId);
 
         // Store the currentId in localStorage
         localStorage.setItem('currentId', currentId);
+
+        // Store the login status in localStorage
+        localStorage.setItem('isLogin', String(this.isLogin));
     }
 
     load() {
@@ -108,7 +115,14 @@ class TaskManager {
             // Convert it to an array and store it in our TaskManager
             this.tasks = JSON.parse(tasksJson);
         }
+        // Check if any team are saved in localStorage
+        if (localStorage.getItem('team')) {
+            // Get the JSON string of tasks in localStorage
+            const teamJson = localStorage.getItem('team');
 
+            // Convert it to an array and store it in our TaskManager
+            this.team = JSON.parse(teamJson);
+        }
         // Check if the currentId is saved in localStorage
         if (localStorage.getItem('currentId')) {
             // Get the currentId string in localStorage
@@ -116,6 +130,11 @@ class TaskManager {
 
             // Convert the currentId to a number and store it in our TaskManager
             this.currentId = Number(currentId);
+        }
+        // Check if the login status is saved in localStorage
+        if (localStorage.getItem('isLogin')) {
+            // Get the login status string in localStorage
+            this.isLogin = JSON.parse(localStorage.getItem('isLogin'));
         }
     }
 }
