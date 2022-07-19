@@ -1,5 +1,5 @@
-// Variable to count number of attempts.
-var attempt = 3; 
+// Variable of login model 
+var attempt = 3; //count number of attempts.
 var checkUName = "";
 var checkPW = "";
 const loginform = document.querySelector(".login");
@@ -24,14 +24,20 @@ const memPlace = document.getElementById("memplace");
 const manager = new TaskManager();
 // Load the tasks from localStorage
 manager.load();
+//render ALL task get from localStorage
 for (let i = 0; i < manager.tasks.length; i++) {
-    manager.render(manager.tasks[i]);
+    manager.render(manager.tasks[i]); //this one only render new task
 }
-
-if (manager.isLogin == false){
+//render only the first team member into "Assign to" option when it's not log in
+manager.renderAssignee(1);
+function start(){
     loginPlace.style.display = "block";
-    teamPlace.setAttribute("display","none !important");
+    teamPlace.setAttribute("style","display:none !important");
     userPlace.style.display = "none";
+}
+start();
+// Start of login function: check if user is logined
+if (manager.isLogin == false){
     // Below function Executes on submit of login form.
     loginform.addEventListener("submit", (event) => {
         event.preventDefault(); // //stop form from submitting
@@ -63,44 +69,44 @@ if (manager.isLogin == false){
 }else{
     logined();
 }
-
+// after you login successfully, run this
 function logined(){
+    //update login status to true
     manager.isLogin = "true";
     manager.save();
+    //render team member into "Assign to" option using team localStorage
+    manager.renderAssignee();
+    //render team members from localStorage, i start from 1 because we already set the firt one:myself
     for (let i = 1; i < manager.team.length; i++) {
         manager.renderMem(manager.team[i]);
     }
     $('#loginModal').modal('hide');
     loginPlace.style.display = "none";
-    teamPlace.style.display = "block";
+    teamPlace.removeAttribute("style","display:none !important");
     userPlace.style.display = "block";
     const teamName = document.querySelector(".teamname");
     teamName.innerHTML = `${manager.team[0].member}'s Team`;
     document.getElementById("memListTop").innerHTML = `${manager.team[0].member}`;
     const logoutbtn = document.querySelector(".logout");
     logoutbtn.setAttribute("type","button");
+    //this btn control what happen when loged out
     logoutbtn.onclick = function() {
         alert("Logout successfully");
         manager.team[0].member = "You";
-        manager.team.splice(1);
         manager.isLogin = "false";
         manager.save();
-        location.reload();
+        //render only the first team member into "Assign to" option when it's not log in
+        manager.renderAssignee(1);
+        start();
     };
-}
-
-function genElement(text, messageType, tag="div", location) {
-	// generates HTML elements which displays text
-	let newElement = document.createElement(tag);
-	newElement.innerHTML = text;
-	newElement.setAttribute("class",messageType); // add class for styling
-	location.appendChild(newElement);
 }
 
 /* javascript for managing tasks */
 
 // set click listener for create task button
 createBtn.addEventListener("click", event => {
+    //Validation
+    //if there is no input, change bg color to pink and return to white after click
     const inputList = [projectInput, summaryInput, dueDateInput, assigneeInput];
     for (let i=0; i<inputList.length;i++) {
         if(!inputList[i].value){
@@ -110,11 +116,12 @@ createBtn.addEventListener("click", event => {
             });
         }
     }
+    //After the for loop is finished,if no input/summary>50 letters, alert and return
     if (!projectInput.value || !summaryInput.value || !dueDateInput.value || !assigneeInput.value){
         alert(`You have missing input.`);
         return;
     }
-    if(summaryInput.value.length > 10){
+    if(summaryInput.value.length > 50){
         alert(`Please type in your summary not longer than 50 letters.`);
         summaryInput.value = "";
         summaryInput.style.backgroundColor= "LightPink";
@@ -123,8 +130,12 @@ createBtn.addEventListener("click", event => {
         });
         return;
     }
+    //hide modal
     $("#createTask").modal('hide');
-    console.log(summaryInput.value);
+    //check if assignee == team member[0], which is myself
+    if(assigneeInput.value == manager.team[0].member){
+        assigneeInput.value = "You";
+    }
     // validate inputs omitted
     manager.addTask(projectInput.value, summaryInput.value, descriptionInput.value, dueDateInput.value, assigneeInput.value, statusInput.value);
     manager.save();
@@ -169,6 +180,7 @@ memBtn.addEventListener("click", function() {
     alert("Add member successfully");
     manager.addMem(memInput.value);
     manager.save();
+    manager.renderAssignee();
     memInput.value ="";
     console.log(manager.team);
 });

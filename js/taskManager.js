@@ -41,8 +41,23 @@ class TaskManager {
         newElement.setAttribute("draggable", "true");
         newElement.setAttribute("data-toggle", "modal");
         newElement.setAttribute("data-target", "#editTask");
-        newElement.innerHTML = `<div class="card-body"><div class="row h6 justify-content-between mb-2"><div class="task-title col-11 row flex-wrap">${task.summary}</div><span class="col-1 text-right"><i class="fa-solid fa-xmark"></i></span></div><span class="project-name bg-primary p-1">${task.project}</span><div class="row justify-content-between mt-2"><span class="assignee"><i class="fa-solid fa-circle-user"></i> ${task.assignee}</span><span class="due-date">due: ${task.dueDate}</span></div></div>`
-        document.getElementById(`${task.status}Col`).appendChild(newElement);
+        //check if member is "You", which is myself
+        //get member bg color from this.team
+        const memIndex = this.team.findIndex(object => {
+            return object.member === task.assignee;
+        });
+        if(memIndex < 0){
+            newElement.innerHTML = `<div class="card-body"><div class="row h6 justify-content-between mb-2"><div class="task-title col-11 row flex-wrap">${task.summary}</div><span class="col-1 text-right"><i class="fa-solid fa-xmark"></i></span></div><span class="project-name bg-primary p-1">${task.project}</span><div class="row justify-content-between mt-2"><span class="assignee"><i class="fa-solid fa-circle-user" style="color:#33b5e5;"></i> You</span><span class="due-date">due: ${task.dueDate}</span></div></div>`
+            document.getElementById(`${task.status}Col`).appendChild(newElement);
+        }else{
+            console.log(memIndex);
+            console.log(task.assignee);
+            console.log(typeof(task.assignee));
+            console.log(this.team);
+            console.log(this.team[memIndex].color);
+            newElement.innerHTML = `<div class="card-body"><div class="row h6 justify-content-between mb-2"><div class="task-title col-11 row flex-wrap">${task.summary}</div><span class="col-1 text-right"><i class="fa-solid fa-xmark"></i></span></div><span class="project-name bg-primary p-1">${task.project}</span><div class="row justify-content-between mt-2"><span class="assignee"><i class="fa-solid fa-circle-user" style="color:${this.team[memIndex].color};"></i> ${task.assignee}</span><span class="due-date">due: ${task.dueDate}</span></div></div>`
+            document.getElementById(`${task.status}Col`).appendChild(newElement);
+        }
 
         // add click handler to set edit modal values
         newElement.addEventListener("click", event => {
@@ -93,15 +108,35 @@ class TaskManager {
         this.team.push(newMemGroup);
         this.renderMem(newMemGroup);
     }
-
+    //render team member into "Add Team member" option using team localStorage
     renderMem(mem){
         const newElement = document.createElement("div");
         newElement.setAttribute("class","row mb-2 memList");
-        newElement.innerHTML = `<div class="rounded-circle mr-2" style="height: 40px;width: 40px;background-color:${mem.color};"></div>
+        newElement.innerHTML = `<div class="rounded-circle bg-white mr-2" style="height: 40px;width: 40px;">
+        <i class="fa-solid fa-circle-user" style="color:${mem.color};font-size: 40px;"></i>
+        </div>
         <div id="memListTop">${mem.member}</div>
         <div class="col-sm-2 text-center">Editor</div>`;
         memPlace.appendChild(newElement);
     }
+
+    //render team member into "Assign to" option using team localStorage
+    renderAssignee(index){
+        // I set parameter to control the number of team members to render
+        //When user is loged out, it will only render the first member in team, which is myself
+        if(!index){
+            index = this.team.length;
+        }
+        //clear all child before adding
+        assigneeInput.innerHTML = '';
+        for(let i=0; i<index;i++){
+            const newElement = document.createElement("option");
+            newElement.setAttribute("value",`${this.team[i].member}`);
+            newElement.innerHTML = this.team[i].member;
+            assigneeInput.appendChild(newElement);
+        }
+    }
+    
 
     save(){
         // Store the task JSON string in localStorage
