@@ -77,8 +77,17 @@
 }
 
 .to-do {
+    border-left: 10px solid #fc5e3a;
+}
+
+.doing {
     border-left: 10px solid #fae73c;
 }
+
+.done {
+    border-left: 10px solid #9ff760;
+}
+
  /* add team's member Modal */
 .memList{
     align-items: center;
