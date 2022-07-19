@@ -73,19 +73,19 @@
 }
 
 .backlog {
-    border-left: 10px solid #D3D2FF;
+    border-left: 10px solid #A8A6FF;
 }
 
 .to-do {
-    border-left: 10px solid #fc5e3a;
+    border-left: 10px solid #FF96B5;
 }
 
 .doing {
-    border-left: 10px solid #fae73c;
+    border-left: 10px solid #FFF850;
 }
 
 .done {
-    border-left: 10px solid #9ff760;
+    border-left: 10px solid #A9ED74;
 }
 
  /* add team's member Modal */
