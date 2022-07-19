@@ -39,8 +39,22 @@ class TaskManager {
         newElement.classList.add("card", `${task.status}`);
         newElement.setAttribute("id", `task${task.id}`);
         newElement.setAttribute("draggable", "true");
+        newElement.setAttribute("data-toggle", "modal");
+        newElement.setAttribute("data-target", "#editTask");
         newElement.innerHTML = `<div class="card-body"><div class="row h6 justify-content-between mb-2"><div class="task-title col-11 row flex-wrap">${task.summary}</div><span class="col-1 text-right"><i class="fa-solid fa-xmark"></i></span></div><span class="project-name bg-primary p-1">${task.project}</span><div class="row justify-content-between mt-2"><span class="assignee"><i class="fa-solid fa-circle-user"></i> ${task.assignee}</span><span class="due-date">due: ${task.dueDate}</span></div></div>`
         document.getElementById(`${task.status}Col`).appendChild(newElement);
+
+        // add click handler to set edit modal values
+        newElement.addEventListener("click", event => {
+            const task = manager.getTaskById(parseInt(event.currentTarget.id.replace("task", "")));
+            document.getElementById("edit-project").value = task.project;
+            document.getElementById("edit-summary").value = task.summary;
+            document.getElementById("edit-description").value = task.description;
+            document.getElementById("edit-due").value = task.dueDate;
+            document.getElementById("edit-assignee").value = task.assignee;
+            document.getElementById("edit-status").value = task.status;
+            document.getElementById("editId").value = task.id;
+        });
         
         // add drag handler
         newElement.addEventListener("dragstart", event => {
