@@ -136,6 +136,26 @@ createBtn.addEventListener("click", event => {
 });
 
 
+// set click listener for edit task button
+const editBtn = document.getElementById("editBtn");
+editBtn.addEventListener("click", event => {
+    // validation omitted
+    const edited = manager.getTaskById(parseInt(document.getElementById("editId").value));
+    // edit element in manager array
+    edited.project = document.getElementById("edit-project").value;
+    edited.summary = document.getElementById("edit-summary").value;
+    edited.description = document.getElementById("edit-description").value;
+    edited.dueDate = document.getElementById("edit-due").value;
+    edited.assignee = document.getElementById("edit-assignee").value;
+    edited.status = document.getElementById("edit-status").value;
+    // re-render and re-position
+    const editedElement = document.getElementById(`task${document.getElementById("editId").value}`);
+    editedElement.setAttribute("class", `card ${edited.status}`);
+    editedElement.innerHTML = `<div class="card-body"><div class="row h6 justify-content-between mb-2"><div class="task-title col-11 row flex-wrap">${edited.summary}</div><span class="col-1 text-right"><i class="fa-solid fa-xmark"></i></span></div><span class="project-name bg-primary p-1">${edited.project}</span><div class="row justify-content-between mt-2"><span class="assignee"><i class="fa-solid fa-circle-user"></i> ${edited.assignee}</span><span class="due-date">due: ${edited.dueDate}</span></div></div>`
+    document.getElementById(`${edited.status}Col`).appendChild(editedElement);
+});
+
+
 //set click listener for add member button
 memBtn.addEventListener("click", function() {
     if (!memInput.value){
