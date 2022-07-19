@@ -63,3 +63,69 @@ function genElement(text, messageType, tag="div", location) {
 	newElement.setAttribute("class",messageType); // add class for styling
 	location.appendChild(newElement);
 }
+
+/* javascript for managing tasks */
+
+// input elements of "create task" modal
+const createBtn = document.getElementById("createBtn");
+const projectInput = document.getElementById("select-project");
+const summaryInput = document.getElementById("summary");
+const descriptionInput = document.getElementById("description");
+const dueDateInput = document.getElementById("due");
+const assigneeInput = document.getElementById("select-assignee");
+const statusInput = document.getElementById("status");
+const memInput = document.getElementById("newMem");
+const memBtn = document.getElementById("addMem");
+const memPlace = document.getElementById("memplace");
+
+// create a task manager instance 
+const manager = new TaskManager();
+
+
+// set click listener for create task button
+createBtn.addEventListener("click", event => {
+    // validate inputs omitted
+    manager.addTask(projectInput.value, summaryInput.value, descriptionInput.value, dueDateInput.value, assigneeInput.value, statusInput.value);
+    statusInput.value = "backlog";
+    for (const input of [projectInput, summaryInput, descriptionInput, dueDateInput, assigneeInput]) {
+        input.value = "";
+    }
+    console.log(manager.tasks);
+});
+
+
+//set click listener for add member button
+memBtn.addEventListener("click", function() {
+    alert("Add member successfully");
+    manager.addMem(memInput.value);
+    memInput.value ="";
+    console.log(manager.team);
+});
+
+
+// drag and drop
+// set drag and drop handlers for the four task blocks
+for (const col of ["backlogCol", "to-doCol", "doingCol", "doneCol"]) {
+    const block = document.getElementById(col);
+
+    block.addEventListener("dragover", event => {
+        event.preventDefault();  // to allow drop
+    });
+
+    block.addEventListener("drop", event => {
+        event.preventDefault(); // to allow drop
+        
+        // if a task is dropped in the task block, the task will be added to the end
+        const draggedId = event.dataTransfer.getData("text/id");
+        const dragged = document.getElementById(draggedId);
+        event.currentTarget.appendChild(dragged);
+        
+        // change the status class of the dropped task, for styling
+        const status = col.replace("Col", "");
+        dragged.setAttribute("Class", `card ${status}`);
+        
+        // update the status of the dropped task object in TaskManager
+        const taskId = draggedId.replace("task", "");
+        manager.getTaskById(parseInt(taskId)).status = status;
+    });
+}
