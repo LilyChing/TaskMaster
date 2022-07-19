@@ -293,7 +293,84 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> <!-- end of container -->
+
+    <!-- edit task modal -->
+    <div class="modal fade" id="editTask" tabindex="-1" aria-labelledby="editTaskLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header align-items-center p-0 p-sm-2">
+                    <p class="modal-title d-none d-sm-flex" id="createTaskLabel">Edit Task</p>
+                    <button class="bg-white border-0" data-dismiss="modal" aria-label="Close">
+                        <span class="h3" aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body px-5 px-sm-3">
+                    <div class="row mb-3 mb-sm-2">
+                        <label for="edit-project" class="col-sm-4 mb-1 mb-sm-0">Project</label>
+                        <div class="col-sm-8">
+                            <input id="edit-project" class="form-control" list="projects"
+                                aria-describedby="projHelp">
+                            <datalist id="projects">
+                                <option value="project1">
+                                <option value="project2">
+                            </datalist>
+                            <small id="projHelp" class="form-text text-muted">Select existing projects or enter new
+                                one</small>
+                        </div>
+                    </div>
+                    <div class="row mb-3 mb-sm-2">
+                        <label for="edit-summary" class="col-sm-4 mb-1 mb-sm-0">Summary</label>
+                        <input type="text" class="col-sm-8 form-control" id="edit-summary">
+                    </div>
+                    <div class="row mb-3 mb-sm-2">
+                        <label for="edit-description" class="col-sm-4 mb-1 mb-sm-0">Description</label>
+                        <textarea id="edit-description" class="col-sm-8 px-1 form-control" name="description" rows="3"
+                            cols="30" placeholder="Add description here"></textarea>
+                    </div>
+                    <div class="row mb-3 mb-sm-2">
+                        <label for="edit-due" class="col-4">
+                            <i class="fa fa-calendar d-sm-none"></i>
+                            Due <span class="d-none d-sm-inline">date</span>
+                        </label>
+                        <input type="date" id="edit-due" name="due" class="col-8 px-1 form-control">
+                    </div>
+                    <div class="row mb-3 mb-sm-2">
+                        <label for="edit-assignee" class="col-4">
+                            <span class="d-none d-sm-inline">Assign to</span>
+                            <span class="d-sm-none">
+                                <i class="fa-solid fa-circle-user text-success h4"></i>
+                                <i class="fa-solid fa-circle-user text-danger h4"></i>
+                                <i class="fa-solid fa-circle-user text-primary h4"></i>
+                            </span>
+                        </label>
+                        <input id="edit-assignee" class="col-8 form-control" list="assignees">
+                        <datalist id="assignees">
+                            <option value="Double">
+                            <option value="Lily">
+                            <option value="Tony">
+                        </datalist>
+                    </div>
+                    <div class="row mb-3 mb-sm-2">
+                        <label for="edit-status" class="col-4">Status</label>
+                        <select id="edit-status" name="due" class="col-8 form-control">
+                            <option value="backlog">backlog</option>
+                            <option value="to-do">to do</option>
+                            <option value="doing">doing</option>
+                            <option value="done">done</option>
+                        </select>
+                    </div>
+                    <input id="editId" type="text" class="d-none">  <!-- to store the id of the task being edited -->
+                </div>
+                <div class="modal-footer d-flex justify-content-between">
+                    <button class="btn btn-secondary rounded-pill" data-dismiss="modal">Cancel</button>
+                    <button id="editBtn" class="btn btn-primary rounded-pill" data-dismiss="modal">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>    
+    <!-- end of edit task modal -->
+
     <!-- footer -->
     <div class="footer" style="background: linear-gradient(#A8BBFF,#D3D2FF);">
         <p>Teammate:Tony,Lily,Double.</p>
