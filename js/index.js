@@ -80,12 +80,41 @@ const memPlace = document.getElementById("memplace");
 
 // create a task manager instance 
 const manager = new TaskManager();
-
-
+// Load the tasks from localStorage
+manager.load();
+console.log(manager.tasks);
+for (let i = 0; i < manager.tasks.length; i++) {
+    manager.render(manager.tasks[i]);
+}
 // set click listener for create task button
 createBtn.addEventListener("click", event => {
+    const inputList = [projectInput, summaryInput, dueDateInput, assigneeInput];
+    for (let i=0; i<inputList.length;i++) {
+        if(!inputList[i].value){
+            inputList[i].style.backgroundColor= "LightPink";
+            inputList[i].addEventListener("click",function() {
+                inputList[i].style.backgroundColor= "white";
+            });
+        }
+    }
+    if (!projectInput.value || !summaryInput.value || !dueDateInput.value || !assigneeInput.value){
+        alert(`You have missing input.`);
+        return;
+    }
+    if(summaryInput.value.length > 10){
+        alert(`Please type in your summary not longer than 50 letters.`);
+        summaryInput.value = "";
+        summaryInput.style.backgroundColor= "LightPink";
+        summaryInput.addEventListener("click",function() {
+            summaryInput.style.backgroundColor= "white";
+        });
+        return;
+    }
+    $("#createTask").modal('hide');
+    console.log(summaryInput.value);
     // validate inputs omitted
     manager.addTask(projectInput.value, summaryInput.value, descriptionInput.value, dueDateInput.value, assigneeInput.value, statusInput.value);
+    manager.save();
     statusInput.value = "backlog";
     for (const input of [projectInput, summaryInput, descriptionInput, dueDateInput, assigneeInput]) {
         input.value = "";
@@ -96,6 +125,14 @@ createBtn.addEventListener("click", event => {
 
 //set click listener for add member button
 memBtn.addEventListener("click", function() {
+    if (!memInput.value){
+        alert(`Please input new member's name.`);
+        memInput.style.backgroundColor= "LightPink";
+        memInput.addEventListener("click",function() {
+            memInput.style.backgroundColor= "white";
+        });
+        return;
+    }
     alert("Add member successfully");
     manager.addMem(memInput.value);
     memInput.value ="";

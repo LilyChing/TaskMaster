@@ -1,5 +1,3 @@
-/* javascript for managing tasks */
-
 
 // main class for task management
 class TaskManager {
@@ -88,5 +86,36 @@ class TaskManager {
         <div id="memListTop">${mem.member}</div>
         <div class="col-sm-2 text-center">Editor</div>`;
         memPlace.appendChild(newElement);
+    }
+
+    save(){
+        // Store the JSON string in localStorage
+        localStorage.setItem('tasks', JSON.stringify(this.tasks));
+
+        // Convert the currentId to a string;
+        const currentId = String(this.currentId);
+
+        // Store the currentId in localStorage
+        localStorage.setItem('currentId', currentId);
+    }
+
+    load() {
+        // Check if any tasks are saved in localStorage
+        if (localStorage.getItem('tasks')) {
+            // Get the JSON string of tasks in localStorage
+            const tasksJson = localStorage.getItem('tasks');
+
+            // Convert it to an array and store it in our TaskManager
+            this.tasks = JSON.parse(tasksJson);
+        }
+
+        // Check if the currentId is saved in localStorage
+        if (localStorage.getItem('currentId')) {
+            // Get the currentId string in localStorage
+            const currentId = localStorage.getItem('currentId');
+
+            // Convert the currentId to a number and store it in our TaskManager
+            this.currentId = Number(currentId);
+        }
     }
 }

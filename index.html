@@ -82,7 +82,7 @@
                                             <div class="row mb-4 input-group" >
                                                 <input type="text" class=" form-control" id="newMem" placeholder="Add user into your team..." aria-describedby="button-addon">
                                                 <div class="input-group-append">
-                                                <button type="button" class="btn mb-1 mb-sm-0 px-4 py-0" id="addMem" style="font-size: 30px;">
+                                                <button type="button" class="btn border mb-1 mb-sm-0 px-4 py-0" id="addMem" style="font-size: 30px;">
                                                     +
                                                 </button>
                                                 </div>
@@ -184,7 +184,7 @@
                     </div>
                     <div class="modal-body px-5 px-sm-3">
                         <div class="row mb-3 mb-sm-2">
-                            <label for="select-project" class="col-sm-4 mb-1 mb-sm-0">Project</label>
+                            <label for="select-project" class="col-sm-4 mb-1 mb-sm-0">Project*</label>
                             <div class="col-sm-8">
                                 <input id="select-project" class="form-control" list="projects"
                                     aria-describedby="projHelp">
@@ -197,7 +197,7 @@
                             </div>
                         </div>
                         <div class="row mb-3 mb-sm-2">
-                            <label for="summary" class="col-sm-4 mb-1 mb-sm-0">Summary</label>
+                            <label for="summary" class="col-sm-4 mb-1 mb-sm-0">Summary*</label>
                             <input type="text" class="col-sm-8 form-control" id="summary">
                         </div>
                         <div class="row mb-3 mb-sm-2">
@@ -208,13 +208,13 @@
                         <div class="row mb-3 mb-sm-2">
                             <label for="due" class="col-4">
                                 <i class="fa fa-calendar d-sm-none"></i>
-                                Due <span class="d-none d-sm-inline">date</span>
+                                Due <span class="d-none d-sm-inline">date*</span>
                             </label>
                             <input type="date" id="due" name="due" class="col-8 px-1 form-control">
                         </div>
                         <div class="row mb-3 mb-sm-2">
                             <label for="select-assignee" class="col-4">
-                                <span class="d-none d-sm-inline">Assign to</span>
+                                <span class="d-none d-sm-inline">Assign to*</span>
                                 <span class="d-sm-none">
                                     <i class="fa-solid fa-circle-user text-success h4"></i>
                                     <i class="fa-solid fa-circle-user text-danger h4"></i>
@@ -229,7 +229,7 @@
                             </datalist>
                         </div>
                         <div class="row mb-3 mb-sm-2">
-                            <label for="status" class="col-4">Status</label>
+                            <label for="status" class="col-4">Status*</label>
                             <select id="status" name="due" class="col-8 form-control">
                                 <option value="backlog">backlog</option>
                                 <option value="to-do">to do</option>
@@ -240,7 +240,7 @@
                     </div>
                     <div class="modal-footer d-flex justify-content-between">
                         <button class="btn btn-secondary rounded-pill" data-dismiss="modal">Close</button>
-                        <button id="createBtn" class="btn btn-primary rounded-pill" data-dismiss="modal">Create</button>
+                        <button id="createBtn" class="btn btn-primary rounded-pill">Create</button>
                     </div>
                 </div>
             </div>
