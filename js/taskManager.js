@@ -4,7 +4,7 @@ class TaskManager {
     constructor() {
         this.tasks = [];
         this.currentId = 0;
-        this.projects = [];
+        this.projects = ["project1", "project2"];
         this.team = [{member:"You",color:"#33b5e5"}];
         this.isLogin = false;
     }
