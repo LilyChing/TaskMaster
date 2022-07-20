@@ -185,6 +185,22 @@ editBtn.addEventListener("click", event => {
     });
     editedElement.innerHTML = `<div class="card-body"><div class="row h6 justify-content-between mb-2"><div class="task-title col-11 row flex-wrap">${edited.summary}</div><span class="col-1 text-center deleteBtn"><i class="fa-solid fa-xmark"></i></span></div><span class="project-name bg-primary p-1">${edited.project}</span><div class="row justify-content-between mt-2"><span class="assignee"><i class="fa-solid fa-circle-user" style="color:${manager.team[memIndex].color};"></i> ${edited.assignee}</span><span class="due-date">due: ${date}</span></div></div>`
     document.getElementById(`${edited.status}Col`).appendChild(editedElement);
+    // add delete handler to re-rendered delete button
+    const deleteCatcher = document.querySelector(`#${editedElement.id} .card-body`);
+    deleteCatcher.addEventListener("click", event => {
+        if (event.target === document.querySelector(`#${editedElement.id} .deleteBtn`) || event.target === document.querySelector(`#${editedElement.id} i`)) {
+            if (confirm("Are you sure to delete this task?")) {
+                // delete task from manager.tasks
+                const task = manager.getTaskById(parseInt(editedElement.id.replace("task", "")));
+                const taskIndex = manager.tasks.indexOf(task);
+                manager.tasks.splice(taskIndex, 1);
+                // delete task element from DOM
+                document.getElementById(editedElement.id).remove();
+            }
+            event.stopPropagation();  // the delete click won't bubble up to the task card to trigger edit modal
+            manager.save(); // save change to local storage
+        }
+    });
     // save change to local storage
     manager.save();
 });
@@ -226,6 +242,7 @@ projBtn.addEventListener("click", event => {
         document.getElementById("edit-project").appendChild(newProjInEdit);
         $('#addProject').modal('hide');
         document.getElementById("addProjectInput").value = "";
+        alert("Project successfully added!");
     }
 });
 
@@ -265,6 +282,7 @@ removeProjOpener.addEventListener("click", event => {
 // set click listener for remove project button
 const removeProjBtn = document.getElementById("removeProjBtn");
 removeProjBtn.addEventListener("click", event => {
+    if (! confirm("All tasks under this project will be deleted, are you sure?")) {return;}
     //remove from manager
     const removed = removeProjList.value;
     const removeIndex = manager.projects.indexOf(removed);
@@ -277,7 +295,19 @@ removeProjBtn.addEventListener("click", event => {
     document.querySelector(`#project-list a[name="${removed}"]`).remove();
     // show success message
     document.getElementById("removeProjSuccess").innerHTML = "Project removed successfully";
-    // omitted: remove all tasks under that project
+    // delete corresponding task elements in the DOM, first get all elements using task id
+    const allTasks = document.querySelectorAll('[id^="task"]');
+    // for each element, check the project name, if match then delete
+    for (const taskElement of allTasks) {
+        if (document.querySelector(`#${taskElement.id} .project-name`).innerHTML === removed) {
+            taskElement.remove();  // delete DOM element
+            const task = manager.getTaskById(parseInt(taskElement.id.replace("task", "")));
+            const taskIndex = manager.tasks.indexOf(task);
+            manager.tasks.splice(taskIndex, 1);  // delete from manager array
+        }
+    }
+    // save to local storage
+    manager.save();
 });
 
 
