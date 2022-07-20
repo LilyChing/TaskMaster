@@ -159,7 +159,7 @@ class TaskManager {
         <i class="fa-solid fa-circle-user" style="color:${mem.color};font-size: 40px;"></i>
         </div>
         <div id="memListTop">${mem.member}</div>
-        <div class="col-md-2 text-center">Editor</div>`; // changed from col-sm-2
+        <div class="col-2 text-center">Editor</div>`;
         memPlace.appendChild(newElement);
     }
 

@@ -5,7 +5,15 @@ body {
     height: 100vh;
 
 }
-
+@media only screen and (max-width: 575px) {
+    body {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
+    ::-webkit-scrollbar {
+        display: none;  /* Chrome */
+    }
+  }
 
 /* nav bar style */
 .nameplace,
