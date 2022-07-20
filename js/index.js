@@ -22,12 +22,20 @@ const memPlace = document.getElementById("memplace");
 
 // create a task manager instance 
 const manager = new TaskManager();
+
 // Load the tasks from localStorage
 manager.load();
+
 //render ALL task get from localStorage
 for (let i = 0; i < manager.tasks.length; i++) {
     manager.render(manager.tasks[i]); //this one only render new task
 }
+
+//render ALL projects retrieved from localStorage
+for (let p = 0; p < manager.projects.length; p++) {
+    manager.renderProject(manager.projects[p]);
+}
+
 //render only the first team member into "Assign to" option when it's not log in
 manager.renderAssignee(1);
 function start(){
@@ -36,6 +44,7 @@ function start(){
     userPlace.style.display = "none";
 }
 start();
+
 // Start of login function: check if user is logined
 if (manager.isLogin == false){
     // Below function Executes on submit of login form.
@@ -173,6 +182,112 @@ editBtn.addEventListener("click", event => {
 });
 
 
+/* add project */
+// set click listener for add project button
+const projBtn = document.getElementById("addProjBtn");
+projBtn.addEventListener("click", event => {
+    const newProj = document.getElementById("addProjectInput").value;
+    const warning = document.getElementById("addProjWarning");
+    // validate new project name, not accept empty or used name
+    if (newProj === "") {
+        warning.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> Project name can't be empty";
+    }
+    else if (manager.projects.includes(newProj)) {
+        warning.innerHTML = "<i class='fa-solid fa-circle-exclamation'></i> This name has been used";
+    }
+    // when validation passed
+    else {
+        // update manager.projects
+        manager.projects.push(newProj);
+        // save to local storage
+        manager.save();
+        // make new elements, add to project dropdown and two modal lists
+        const newProjInList = document.createElement("a");
+        newProjInList.innerHTML = newProj;
+        newProjInList.classList.add("dropdown-item");
+        newProjInList.setAttribute("href", "#");
+        newProjInList.setAttribute("name", newProj);
+        document.getElementById("project-list").appendChild(newProjInList);
+        const newProjInCreate = document.createElement("option");
+        newProjInCreate.innerHTML = newProj;
+        newProjInCreate.setAttribute("value", newProj);
+        document.getElementById("select-project").appendChild(newProjInCreate);
+        const newProjInEdit = document.createElement("option");
+        newProjInEdit.innerHTML = newProj;
+        newProjInEdit.setAttribute("value", newProj);
+        document.getElementById("edit-project").appendChild(newProjInEdit);
+        $('#addProject').modal('hide');
+        document.getElementById("addProjectInput").value = "";
+    }
+});
+
+
+// set input handler to reset add project warning sentece
+const newProjInput = document.getElementById("addProjectInput");
+newProjInput.addEventListener("input", event => document.getElementById("addProjWarning").innerHTML = "");
+
+
+// set click handlers to reset project name input when modal is closed
+document.getElementById("cancelAddProj").addEventListener("click", event => {
+     document.getElementById("addProjectInput").value = "";
+     document.getElementById("addProjWarning").innerHTML = "";
+});
+
+document.querySelector("#addProject .close").addEventListener("click", event => {
+     document.getElementById("addProjectInput").value = "";
+     document.getElementById("addProjWarning").innerHTML = "";
+});
+/* end of add project */
+
+
+/* Remove project */
+// set click listener to "remove project" modal opener, render the remove list ad hoc
+const removeProjOpener = document.querySelector('[data-target = "#removeProject"]');
+const removeProjList = document.getElementById("removeProjList");
+removeProjOpener.addEventListener("click", event => {
+    for (let p = 0; p < manager.projects.length; p++) {
+        const proj = document.createElement("option");
+        proj.setAttribute("value", manager.projects[p]);
+        proj.innerHTML = manager.projects[p];
+        removeProjList.appendChild(proj);
+    }
+});
+
+
+// set click listener for remove project button
+const removeProjBtn = document.getElementById("removeProjBtn");
+removeProjBtn.addEventListener("click", event => {
+    //remove from manager
+    const removed = removeProjList.value;
+    const removeIndex = manager.projects.indexOf(removed);
+    manager.projects.splice(removeIndex, 1);
+    manager.save();
+    //remove from remove list, project list, create modal and edit modal
+    document.querySelector(`#removeProjList option[value="${removed}"]`).remove();
+    document.querySelector(`#select-project option[value="${removed}"]`).remove();
+    document.querySelector(`#edit-project option[value="${removed}"]`).remove();
+    document.querySelector(`#project-list a[name="${removed}"]`).remove();
+    // show success message
+    document.getElementById("removeProjSuccess").innerHTML = "Project removed successfully";
+    // omitted: remove all tasks under that project
+});
+
+
+// set focus listener on remove list to reset remove success message
+removeProjList.addEventListener("focus", event => document.getElementById("removeProjSuccess").innerHTML = "");
+
+// set click listeners to erase project list and remove success message when remove modal is closed
+document.getElementById("finishRemove").addEventListener("click", event => {
+    removeProjList.innerHTML = "";
+    document.getElementById("removeProjSuccess").innerHTML = "";
+});
+document.querySelector("#removeProject .close").addEventListener("click", event => {
+    removeProjList.innerHTML = "";
+    document.getElementById("removeProjSuccess").innerHTML = "";
+});
+/* end of remove project */
+
+
 //set click listener for add member button
 memBtn.addEventListener("click", function() {
     if (!memInput.value){
@@ -192,7 +307,7 @@ memBtn.addEventListener("click", function() {
 });
 
 
-// set drag and drop handlers for the four task blocks
+// set drag and drop handlers for the four task columns
 for (const col of ["backlogCol", "to-doCol", "doingCol", "doneCol"]) {
     const block = document.getElementById(col);
 
@@ -245,3 +360,4 @@ for (const tab of tabList) {
         }
     });
 }
+/* end of mobile tab interface */

@@ -159,14 +159,34 @@ class TaskManager {
             assigneeInput.appendChild(newElement);
         }
     }
-    
 
+    // render project to projects dropdowns, create modal and edit modal
+    renderProject(proj) {
+        const newProjInList = document.createElement("a");
+        newProjInList.innerHTML = proj;
+        newProjInList.classList.add("dropdown-item");
+        newProjInList.setAttribute("href", "#");
+        newProjInList.setAttribute("name", proj);
+        document.getElementById("project-list").appendChild(newProjInList);
+        const newProjInCreate = document.createElement("option");
+        newProjInCreate.innerHTML = proj;
+        newProjInCreate.setAttribute("value", proj);
+        document.getElementById("select-project").appendChild(newProjInCreate);
+        const newProjInEdit = document.createElement("option");
+        newProjInEdit.innerHTML = proj;
+        newProjInEdit.setAttribute("value", proj);
+        document.getElementById("edit-project").appendChild(newProjInEdit);
+    }
+    
     save(){
         // Store the task JSON string in localStorage
         localStorage.setItem('tasks', JSON.stringify(this.tasks));
 
         // Store the team member JSON string in localStorage
         localStorage.setItem('team', JSON.stringify(this.team));
+
+        // Store the projects JSON string in localStorage  //added
+        localStorage.setItem('projects', JSON.stringify(this.projects));
 
         // Convert the currentId to a string;
         const currentId = String(this.currentId);
@@ -194,6 +214,14 @@ class TaskManager {
 
             // Convert it to an array and store it in our TaskManager
             this.team = JSON.parse(teamJson);
+        }
+        // Check if any project is saved in localStorage  //added
+        if (localStorage.getItem('projects')) {
+            // Get the JSON string of tasks in localStorage
+            const projJson = localStorage.getItem('projects');
+
+            // Convert it to an array and store it in our TaskManager
+            this.projects = JSON.parse(projJson);
         }
         // Check if the currentId is saved in localStorage
         if (localStorage.getItem('currentId')) {
