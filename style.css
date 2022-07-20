@@ -1,7 +1,8 @@
 body {
     background-image: url(./image/16.png);
-    background-repeat: none;
-    background-size: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    object-fit: cover;
 }
 
 
