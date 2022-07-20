@@ -41,14 +41,22 @@ class TaskManager {
         newElement.setAttribute("draggable", "true");
         newElement.setAttribute("data-toggle", "modal");
         newElement.setAttribute("data-target", "#editTask");
+
         // reformat due date from "yyyy-mm-dd" to "dd/mm/yyyy"
         let date = task.dueDate.split("-");
         [date[0], date[2]] = [date[2], date[0]];
         date = date.join("/");
+
         //get member bg color from this.team
         const memIndex = this.team.findIndex(object => {
             return object.member === task.assignee;
         });
+
+        // determine show/hide when add task under project filter  // added
+        if (document.getElementById("currentProjText").innerHTML !== "All Tasks" && document.getElementById("currentProjText").innerHTML !== task.status) {
+            newElement.style.display = "none";
+        }
+
         //check if we can find index from this.team, if not, 
         if(memIndex < 0){
             newElement.innerHTML = `<div class="card-body"><div class="row h6 justify-content-between mb-2"><div class="task-title col-11 row flex-wrap">${task.summary}</div><span class="col-1 text-center deleteBtn"><i class="fa-solid fa-xmark"></i></span></div><span class="project-name bg-primary p-1">${task.project}</span><div class="row justify-content-between mt-2"><span class="assignee"><i class="fa-solid fa-circle-user" style="color:#33b5e5;"></i> You</span><span class="due-date">due: ${date}</span></div></div>`
@@ -151,7 +159,7 @@ class TaskManager {
         <i class="fa-solid fa-circle-user" style="color:${mem.color};font-size: 40px;"></i>
         </div>
         <div id="memListTop">${mem.member}</div>
-        <div class="col-sm-2 text-center">Editor</div>`;
+        <div class="col-md-2 text-center">Editor</div>`; // changed from col-sm-2
         memPlace.appendChild(newElement);
     }
 

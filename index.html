@@ -149,7 +149,7 @@
                                                         placeholder="Add user into your team..."
                                                         aria-describedby="button-addon">
                                                     <div class="input-group-append">
-                                                        <button type="button" class="btn border mb-1 mb-sm-0 px-4 py-0"
+                                                        <button type="button" class="btn border mb-1 mb-md-0 px-4 py-0"
                                                             id="addMem" style="font-size: 30px;">
                                                             +
                                                         </button>
@@ -162,7 +162,7 @@
                                                             style="color:#33b5e5;font-size: 40px;"></i>
                                                     </div>
                                                     <div id="memListTop">Guest</div>
-                                                    <div class="col-sm-2 text-center">Owner</div>
+                                                    <div class="col-md-2 text-center">Owner</div>
                                                 </div>
                                             </div>
                                             <div class="modal-footer justify-content-between">
@@ -252,44 +252,44 @@
         <div class="modal fade" id="createTask" tabindex="-1" aria-labelledby="createTaskLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
-                    <div class="modal-header align-items-center p-0 p-sm-2">
-                        <p class="modal-title d-none d-sm-flex" id="createTaskLabel">Create Task</p>
+                    <div class="modal-header align-items-center p-0 p-md-2">
+                        <p class="modal-title d-none d-md-flex" id="createTaskLabel">Create Task</p>
                         <button class="bg-white border-0" data-dismiss="modal" aria-label="Close">
                             <span class="h3" aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body px-5 px-sm-3">
-                        <div class="row mb-3 mb-sm-2">
-                            <label for="select-project" class="col-sm-4 mb-1 mb-sm-0">Project*</label>
-                            <select id="select-project" class="col-sm-8 form-control"></select>
+                    <div class="modal-body px-5 px-md-3">
+                        <div class="row mb-3 mb-md-2">
+                            <label for="select-project" class="col-md-4 mb-1 mb-md-0">Project*</label>
+                            <select id="select-project" class="col-md-8 form-control"></select>
                         </div>
-                        <div class="row mb-3 mb-sm-2">
-                            <label for="summary" class="col-sm-4 mb-1 mb-sm-0">Summary*</label>
-                            <input type="text" class="col-sm-8 form-control" id="summary">
+                        <div class="row mb-3 mb-md-2">
+                            <label for="summary" class="col-md-4 mb-1 mb-md-0">Summary*</label>
+                            <input type="text" class="col-md-8 form-control" id="summary">
                         </div>
-                        <div class="row mb-3 mb-sm-2">
-                            <label for="description" class="col-sm-4 mb-1 mb-sm-0">Description</label>
-                            <textarea id="description" class="col-sm-8 px-1 form-control" name="description" rows="3"
+                        <div class="row mb-3 mb-md-2">
+                            <label for="description" class="col-md-4 mb-1 mb-md-0">Description</label>
+                            <textarea id="description" class="col-md-8 px-1 form-control" name="description" rows="3"
                                 cols="30" placeholder="Add description here"></textarea>
                         </div>
-                        <div class="row mb-3 mb-sm-2">
+                        <div class="row mb-3 mb-md-2">
                             <label for="due" class="col-4">
-                                <i class="fa fa-calendar d-sm-none"></i>
-                                Due <span class="d-none d-sm-inline">date*</span>
+                                <i class="fa fa-calendar d-md-none"></i>
+                                Due <span class="d-none d-md-inline">date*</span>
                             </label>
                             <input type="date" id="due" name="due" class="col-8 px-1 form-control">
                         </div>
-                        <div class="row mb-3 mb-sm-2">
+                        <div class="row mb-3 mb-md-2">
                             <label for="select-assignee" class="col-4">
-                                <span class="d-none d-sm-inline">Assign to*</span>
-                                <span class="d-sm-none">
+                                <span class="d-none d-md-inline">Assign to*</span>
+                                <span class="d-md-none">
                                     <i class="fa-solid fa-circle-user text-dark h4"></i>
                                 </span>
                             </label>
                             <select id="select-assignee" name="assignees" class="col-8 form-control">
                             </select>
                         </div>
-                        <div class="row mb-3 mb-sm-2">
+                        <div class="row mb-3 mb-md-2">
                             <label for="status" class="col-4">Status*</label>
                             <select id="status" name="due" class="col-8 form-control">
                                 <option value="backlog">backlog</option>
@@ -310,15 +310,15 @@
 
         <div class="row row1">
             <!-- mobile tabs -->
-            <div class="row col-12 d-sm-none align-items-end">
+            <div class="row col-12 d-md-none align-items-end">
                 <div class="col-3 text-center" id="backlogTab">Backlog</div>
                 <div class="col-3 text-center" id="to-doTab">To-do</div>
                 <div class="col-3 text-center" id="doingTab">Doing</div>
                 <div class="col-3 text-center" id="doneTab">Done</div>
             </div>
             <!-- end of mobile tabs -->
-            <div class="col-sm-3 flex-column d-none d-sm-flex align-items-center px-sm-3" id="backlogTabContent">
-                <h4 class="d-none d-sm-block">Backlog</h4>
+            <div class="col-md-3 flex-column d-none d-md-flex align-items-center px-md-3" id="backlogTabContent">
+                <h4 class="d-none d-md-block">Backlog</h4>
                 <div class="cardCol">
                     <div class="myBlock" id="backlogCol">
                         <!-- sample task card -->
@@ -340,22 +340,22 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-3 flex-column d-none d-sm-flex align-items-center px-sm-3" id="to-doTabContent">
-                <h4 class="d-none d-sm-block">To-Do</h4>
+            <div class="col-md-3 flex-column d-none d-md-flex align-items-center px-md-3" id="to-doTabContent">
+                <h4 class="d-none d-md-block">To-Do</h4>
                 <div class="cardCol">
                     <div class="myBlock" id="to-doCol">
                     </div>
                 </div>
             </div>
-            <div class="col-sm-3 flex-column d-none d-sm-flex align-items-center px-sm-3" id="doingTabContent">
-                <h4 class="d-none d-sm-block">Doing</h4>
+            <div class="col-md-3 flex-column d-none d-md-flex align-items-center px-md-3" id="doingTabContent">
+                <h4 class="d-none d-md-block">Doing</h4>
                 <div class="cardCol">
                     <div class="myBlock" id="doingCol">
                     </div>
                 </div>
             </div>
-            <div class="col-sm-3 flex-column d-none d-sm-flex align-items-center px-sm-3" id="doneTabContent">
-                <h4 class="d-none d-sm-block">Done</h4>
+            <div class="col-md-3 flex-column d-none d-md-flex align-items-center px-md-3" id="doneTabContent">
+                <h4 class="d-none d-md-block">Done</h4>
                 <div class="cardCol">
                     <div class="myBlock" id="doneCol">
                     </div>
@@ -375,44 +375,44 @@
     <div class="modal fade" id="editTask" tabindex="-1" aria-labelledby="editTaskLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
-                <div class="modal-header align-items-center p-0 p-sm-2">
-                    <p class="modal-title d-none d-sm-flex" id="createTaskLabel">Edit Task</p>
+                <div class="modal-header align-items-center p-0 p-md-2">
+                    <p class="modal-title d-none d-md-flex" id="createTaskLabel">Edit Task</p>
                     <button class="bg-white border-0" data-dismiss="modal" aria-label="Close">
                         <span class="h3" aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body px-5 px-sm-3">
-                    <div class="row mb-3 mb-sm-2">
-                        <label for="edit-project" class="col-sm-4 mb-1 mb-sm-0">Project*</label>
-                        <select id="edit-project" class="col-sm-8 form-control"></select>
+                <div class="modal-body px-5 px-md-3">
+                    <div class="row mb-3 mb-md-2">
+                        <label for="edit-project" class="col-md-4 mb-1 mb-md-0">Project*</label>
+                        <select id="edit-project" class="col-md-8 form-control"></select>
                     </div>
-                    <div class="row mb-3 mb-sm-2">
-                        <label for="edit-summary" class="col-sm-4 mb-1 mb-sm-0">Summary</label>
-                        <input type="text" class="col-sm-8 form-control" id="edit-summary">
+                    <div class="row mb-3 mb-md-2">
+                        <label for="edit-summary" class="col-md-4 mb-1 mb-md-0">Summary</label>
+                        <input type="text" class="col-md-8 form-control" id="edit-summary">
                     </div>
-                    <div class="row mb-3 mb-sm-2">
-                        <label for="edit-description" class="col-sm-4 mb-1 mb-sm-0">Description</label>
-                        <textarea id="edit-description" class="col-sm-8 px-1 form-control" name="description" rows="3"
+                    <div class="row mb-3 mb-md-2">
+                        <label for="edit-description" class="col-md-4 mb-1 mb-md-0">Description</label>
+                        <textarea id="edit-description" class="col-md-8 px-1 form-control" name="description" rows="3"
                             cols="30" placeholder="Add description here"></textarea>
                     </div>
-                    <div class="row mb-3 mb-sm-2">
+                    <div class="row mb-3 mb-md-2">
                         <label for="edit-due" class="col-4">
-                            <i class="fa fa-calendar d-sm-none"></i>
-                            Due <span class="d-none d-sm-inline">date</span>
+                            <i class="fa fa-calendar d-md-none"></i>
+                            Due <span class="d-none d-md-inline">date</span>
                         </label>
                         <input type="date" id="edit-due" name="due" class="col-8 px-1 form-control">
                     </div>
-                    <div class="row mb-3 mb-sm-2">
+                    <div class="row mb-3 mb-md-2">
                         <label for="edit-assignee" class="col-4">
-                            <span class="d-none d-sm-inline">Assign to</span>
-                            <span class="d-sm-none">
+                            <span class="d-none d-md-inline">Assign to</span>
+                            <span class="d-md-none">
                                 <i class="fa-solid fa-circle-user text-dark h4"></i>
                             </span>
                         </label>
                         <select id="edit-assignee" name="edit-assignees" class="col-8 form-control">
                         </select>
                     </div>
-                    <div class="row mb-3 mb-sm-2">
+                    <div class="row mb-3 mb-md-2">
                         <label for="edit-status" class="col-4">Status</label>
                         <select id="edit-status" name="due" class="col-8 form-control">
                             <option value="backlog">backlog</option>

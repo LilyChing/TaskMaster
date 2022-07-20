@@ -412,8 +412,8 @@ for (const col of ["backlogCol", "to-doCol", "doingCol", "doneCol"]) {
 // a list of the four tab buttons
 const tabList = [document.getElementById("backlogTab"), document.getElementById("to-doTab"), document.getElementById("doingTab"), document.getElementById("doneTab")];
 // class strings for showing/hiding task columns
-const showClasses = "col-sm-3 flex-column d-flex align-items-center px-sm-3";
-const hideClasses = "col-sm-3 flex-column d-none d-sm-flex align-items-center px-sm-3";
+const showClasses = "col-md-3 flex-column d-flex align-items-center px-md-3";
+const hideClasses = "col-md-3 flex-column d-none d-md-flex align-items-center px-md-3";
 // inititalie one tab to be active
 document.getElementById("backlogTab").style.padding = "5px 0";
 document.getElementById("backlogTab").style.backgroundColor = "#A8A6FF";
