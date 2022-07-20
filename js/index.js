@@ -172,19 +172,28 @@ editBtn.addEventListener("click", event => {
     edited.dueDate = document.getElementById("edit-due").value;
     edited.assignee = document.getElementById("edit-assignee").value;
     edited.status = document.getElementById("edit-status").value;
+    
     // re-render and re-position
     const editedElement = document.getElementById(`task${document.getElementById("editId").value}`);
     editedElement.setAttribute("class", `card ${edited.status}`);
+    
     // reformat due date from "yyyy-mm-dd" to "dd/mm/yyyy"
     let date = edited.dueDate.split("-");
     [date[0], date[2]] = [date[2], date[0]];
     date = date.join("/");
+    
     //get member bg color from this.team
     const memIndex = manager.team.findIndex(object => {
         return object.member === edited.assignee;
     });
     editedElement.innerHTML = `<div class="card-body"><div class="row h6 justify-content-between mb-2"><div class="task-title col-11 row flex-wrap">${edited.summary}</div><span class="col-1 text-center deleteBtn"><i class="fa-solid fa-xmark"></i></span></div><span class="project-name bg-primary p-1">${edited.project}</span><div class="row justify-content-between mt-2"><span class="assignee"><i class="fa-solid fa-circle-user" style="color:${manager.team[memIndex].color};"></i> ${edited.assignee}</span><span class="due-date">due: ${date}</span></div></div>`
     document.getElementById(`${edited.status}Col`).appendChild(editedElement);
+    
+    // determine show/hide when edit under project filter
+    if (document.getElementById("currentProjText").innerHTML !== "All Tasks" && document.getElementById("currentProjText").innerHTML !== edited.status) {
+        editedElement.style.display = "none";
+    }
+    
     // add delete handler to re-rendered delete button
     const deleteCatcher = document.querySelector(`#${editedElement.id} .card-body`);
     deleteCatcher.addEventListener("click", event => {
@@ -201,6 +210,7 @@ editBtn.addEventListener("click", event => {
             manager.save(); // save change to local storage
         }
     });
+    
     // save change to local storage
     manager.save();
 });
@@ -242,8 +252,33 @@ projBtn.addEventListener("click", event => {
         document.getElementById("edit-project").appendChild(newProjInEdit);
         $('#addProject').modal('hide');
         document.getElementById("addProjectInput").value = "";
+
+        // add click listener to project dropdown items for filtering
+        newProjInList.addEventListener("click", event => {
+            // get all task elements in DOM
+            const allTasks = document.querySelectorAll('[id^="task"]');
+            // for each element, check the project name, if not match then display none
+            for (const taskElement of allTasks) {
+                if (document.querySelector(`#${taskElement.id} .project-name`).innerHTML !== newProj) {
+                    taskElement.style.display = "none";
+                }
+                else {taskElement.style.display = "";}
+            }
+            document.getElementById("currentProjText").innerHTML = newProj;
+        });
         alert("Project successfully added!");
     }
+});
+
+// set click handler to reset project filter
+document.getElementById("allProjects").addEventListener("click", event => {
+    // get all task elements in DOM
+    const allTasks = document.querySelectorAll('[id^="task"]');
+    // for each element, check the project name, if not match then display none
+    for (const taskElement of allTasks) {
+        taskElement.style.display = "";
+    }
+    document.getElementById("currentProjText").innerHTML = "All Tasks";
 });
 
 
