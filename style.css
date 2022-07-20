@@ -110,6 +110,25 @@ body {
     align-items: center;
 }
 
+/* mobile tabs */
+#backlogTab, #to-doTab, #doingTab, #doneTab {
+    border-radius: 10px 10px 0 0;
+    border: 1px solid transparent;
+    cursor: pointer;
+    background-color: #7F6C9D; /* default colour, subject to initialization and change*/
+}
+
+@media only screen and (max-width: 576px) {
+    .cardCol {
+        border-radius: 0;
+        border-color: #A8A6FF;
+        border-top: 20px solid #A8A6FF;
+    }
+    .container {
+        padding: 0;
+    }
+}
+
 /* footer */
 .footer {
     position: fixed;

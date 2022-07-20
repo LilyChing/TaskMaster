@@ -162,7 +162,11 @@ editBtn.addEventListener("click", event => {
     // re-render and re-position
     const editedElement = document.getElementById(`task${document.getElementById("editId").value}`);
     editedElement.setAttribute("class", `card ${edited.status}`);
-    editedElement.innerHTML = `<div class="card-body"><div class="row h6 justify-content-between mb-2"><div class="task-title col-11 row flex-wrap">${edited.summary}</div><span class="col-1 text-center deleteBtn"><i class="fa-solid fa-xmark"></i></span></div><span class="project-name bg-primary p-1">${edited.project}</span><div class="row justify-content-between mt-2"><span class="assignee"><i class="fa-solid fa-circle-user"></i> ${edited.assignee}</span><span class="due-date">due: ${edited.dueDate}</span></div></div>`
+    // reformat due date from "yyyy-mm-dd" to "dd/mm/yyyy"
+    let date = edited.dueDate.split("-");
+    [date[0], date[2]] = [date[2], date[0]];
+    date = date.join("/");
+    editedElement.innerHTML = `<div class="card-body"><div class="row h6 justify-content-between mb-2"><div class="task-title col-11 row flex-wrap">${edited.summary}</div><span class="col-1 text-center deleteBtn"><i class="fa-solid fa-xmark"></i></span></div><span class="project-name bg-primary p-1">${edited.project}</span><div class="row justify-content-between mt-2"><span class="assignee"><i class="fa-solid fa-circle-user"></i> ${edited.assignee}</span><span class="due-date">due: ${date}</span></div></div>`
     document.getElementById(`${edited.status}Col`).appendChild(editedElement);
     // save change to local storage
     manager.save();
@@ -188,7 +192,6 @@ memBtn.addEventListener("click", function() {
 });
 
 
-// drag and drop
 // set drag and drop handlers for the four task blocks
 for (const col of ["backlogCol", "to-doCol", "doingCol", "doneCol"]) {
     const block = document.getElementById(col);
@@ -213,5 +216,32 @@ for (const col of ["backlogCol", "to-doCol", "doingCol", "doneCol"]) {
         const taskId = draggedId.replace("task", "");
         manager.getTaskById(parseInt(taskId)).status = status;
         manager.save();
+    });
+}
+
+
+/* mobile tab interface */
+// a list of the four tab buttons
+const tabList = [document.getElementById("backlogTab"), document.getElementById("to-doTab"), document.getElementById("doingTab"), document.getElementById("doneTab")];
+// class strings for showing/hiding task columns
+const showClasses = "col-sm-3 flex-column d-flex align-items-center px-sm-3";
+const hideClasses = "col-sm-3 flex-column d-none d-sm-flex align-items-center px-sm-3";
+// inititalie one tab to be active
+document.getElementById("backlogTab").style.padding = "5px 0";
+document.getElementById("backlogTab").style.backgroundColor = "#A8A6FF";
+document.getElementById("backlogTabContent").setAttribute("class", showClasses);
+// add click handler to switch tabs
+for (const tab of tabList) {
+    tab.addEventListener("click", event => {
+        // set colours, size and classes for current tab
+        tab.style.backgroundColor = "#A8A6FF";
+        tab.style.padding = "5px 0";
+        document.getElementById(`${tab.id}Content`).setAttribute("class", showClasses);
+        // set colours, size and classes for the three inactive tabs
+        for (const otherTab of tabList.filter(t => t !== tab)) {
+            otherTab.style.backgroundColor = "#7F6C9D";
+            otherTab.style.padding = "";
+            document.getElementById(`${otherTab.id}Content`).setAttribute("class", hideClasses);
+        }
     });
 }
