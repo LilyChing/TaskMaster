@@ -197,6 +197,20 @@ class TaskManager {
         newProjInEdit.innerHTML = proj;
         newProjInEdit.setAttribute("value", proj);
         document.getElementById("edit-project").appendChild(newProjInEdit);
+
+        // add click listener to project dropdown items for filtering
+        newProjInList.addEventListener("click", event => {
+            // get all task elements in DOM
+            const allTasks = document.querySelectorAll('[id^="task"]');
+            // for each element, check the project name, if not match then display none
+            for (const taskElement of allTasks) {
+                if (document.querySelector(`#${taskElement.id} .project-name`).innerHTML !== proj) {
+                    taskElement.style.display = "none";
+                }
+                else {taskElement.style.display = "";}
+            }
+            document.getElementById("currentProjText").innerHTML = proj;
+        });
     }
     
     save(){
@@ -206,7 +220,7 @@ class TaskManager {
         // Store the team member JSON string in localStorage
         localStorage.setItem('team', JSON.stringify(this.team));
 
-        // Store the projects JSON string in localStorage  //added
+        // Store the projects JSON string in localStorage
         localStorage.setItem('projects', JSON.stringify(this.projects));
 
         // Convert the currentId to a string;
@@ -236,7 +250,7 @@ class TaskManager {
             // Convert it to an array and store it in our TaskManager
             this.team = JSON.parse(teamJson);
         }
-        // Check if any project is saved in localStorage  //added
+        // Check if any project is saved in localStorage
         if (localStorage.getItem('projects')) {
             // Get the JSON string of tasks in localStorage
             const projJson = localStorage.getItem('projects');
