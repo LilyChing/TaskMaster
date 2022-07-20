@@ -245,10 +245,17 @@
         </div>
         <!-- end of "create task" modal -->
 
-        <div class="row row1 flex-nowrap">
-            <div class="col-3 flex-column d-flex align-items-center mx-4">
-
-                <h4>Backlog</h4>
+        <div class="row row1">
+            <!-- mobile tabs -->
+            <div class="row col-12 d-sm-none align-items-end">
+                <div class="col-3 text-center" id="backlogTab">Backlog</div>
+                <div class="col-3 text-center" id="to-doTab">To-do</div>
+                <div class="col-3 text-center" id="doingTab">Doing</div>
+                <div class="col-3 text-center" id="doneTab">Done</div>
+            </div>
+            <!-- end of mobile tabs -->
+            <div class="col-sm-3 flex-column d-none d-sm-flex align-items-center px-sm-3" id="backlogTabContent">
+                <h4 class="d-none d-sm-block">Backlog</h4>
                 <div class="cardCol">
                     <div class="myBlock" id="backlogCol">
                    <!-- sample task card -->
@@ -269,22 +276,22 @@
                     </div>
                 </div>
             </div>
-            <div class="col-3 flex-column d-flex align-items-center mx-4">
-                <h4>To-Do</h4>
+            <div class="col-sm-3 flex-column d-none d-sm-flex align-items-center px-sm-3" id="to-doTabContent">
+                <h4 class="d-none d-sm-block">To-Do</h4>
                 <div class="cardCol">
                     <div class="myBlock" id="to-doCol">
                     </div>
                 </div>
             </div>
-            <div class="col-3 flex-column d-flex align-items-center mx-4">
-                <h4>Doing</h4>
+            <div class="col-sm-3 flex-column d-none d-sm-flex align-items-center px-sm-3" id="doingTabContent">
+                <h4 class="d-none d-sm-block">Doing</h4>
                 <div class="cardCol">
                     <div class="myBlock" id="doingCol">
                     </div>
                 </div>
             </div>
-            <div class="col-3 flex-column d-flex align-items-center mx-4">
-                <h4>Done</h4>
+            <div class="col-sm-3 flex-column d-none d-sm-flex align-items-center px-sm-3" id="doneTabContent">
+                <h4 class="d-none d-sm-block">Done</h4>
                 <div class="cardCol">
                     <div class="myBlock" id="doneCol">
                     </div>
