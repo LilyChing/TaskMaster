@@ -43,18 +43,63 @@
                             Project
                         </a>
                         <ul class="dropdown-menu">
-                            <li><h4 class="dropdown-header">User's Team</h4></li>
-                            <li><a class="dropdown-item" href="#">Success</a></li>
-                            <li><a class="dropdown-item" href="#">Peace</a></li>
+                            <li id="project-list"></li>  <!-- contains existing projects -->
                             <li><hr class="dropdown-divider"></li>
-                            <h4 class="dropdown-header">Personal</h4></li>
-                            <li><a class="dropdown-item" href="#">Main</a></li>
-                            <li><a class="dropdown-item" href="#">Secondary</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <h4 class="dropdown-header">Other</h4></li>
-                            <li><a class="dropdown-item" href="#">Add project</a></li>
+                            <li><a class="dropdown-item" href="#" data-toggle="modal" data-target="#addProject">Add project +</a></li>
+                            <li><a class="dropdown-item" href="#" data-toggle="modal" data-target="#removeProject">Remove project</a></li>
                         </ul>
                     </li>
+
+                    <!-- add project modal --> 
+                    <div class="modal fade" id="addProject" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="addProjectModal" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="addProjectModalLabel">Add a project</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <input id="addProjectInput" class="form-control" placeholder="Enter new project name" maxlength="50">
+                                    <small id="addProjWarning" class="form-text text-danger"></small>
+                                </div>
+                                <div class="modal-footer d-flex justify-content-between">
+                                    <button id="cancelAddProj" class="btn btn-secondary rounded-pill" data-dismiss="modal">Cancel</button>
+                                    <button id="addProjBtn" type="button" class="btn btn-primary rounded-pill">Add</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end of add project modal -->
+                    
+                    <!-- remove project modal --> 
+                    <div class="modal fade" id="removeProject" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="removeProjectModal" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="removeProjectModalLabel">Remove project</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="input-group">
+                                        <select id="removeProjList" class="form-control"></select>
+                                        <div class="input-group-append">
+                                            <button id="removeProjBtn" class="btn btn-primary">remove</button>
+                                        </div>
+                                    </div>
+                                    <small id="removeProjSuccess" class="form-text text-success"></small>
+                                </div>
+                                <div class="modal-footer d-flex justify-content-center">
+                                    <button id="finishRemove" class="btn btn-secondary rounded-pill" data-dismiss="modal">Finished</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end of remove project modal -->
+
                     <form class="form-inline order-lg-last nameplace ml-0 ml-lg-auto">
                     <div class="teamplace d-flex" style="display: none !important;">
                         <li><span class="navbar-text mr-3 teamname">Guest</span></li>
@@ -169,6 +214,7 @@
         </div>
     </div>
     <!-- End of login Model -->
+
     <div class="container max-width: 2000px">
         <div class="row align-items-center mt-4">
             <p class="m-0">Project A</p>
@@ -189,16 +235,7 @@
                     <div class="modal-body px-5 px-sm-3">
                         <div class="row mb-3 mb-sm-2">
                             <label for="select-project" class="col-sm-4 mb-1 mb-sm-0">Project*</label>
-                            <div class="col-sm-8">
-                                <input id="select-project" class="form-control" list="projects"
-                                    aria-describedby="projHelp">
-                                <datalist id="projects">
-                                    <option value="project1">
-                                    <option value="project2">
-                                </datalist>
-                                <small id="projHelp" class="form-text text-muted">Select existing projects or enter new
-                                    one</small>
-                            </div>
+                            <select id="select-project" class="col-sm-8 form-control"></select>
                         </div>
                         <div class="row mb-3 mb-sm-2">
                             <label for="summary" class="col-sm-4 mb-1 mb-sm-0">Summary*</label>
@@ -312,17 +349,8 @@
                 </div>
                 <div class="modal-body px-5 px-sm-3">
                     <div class="row mb-3 mb-sm-2">
-                        <label for="edit-project" class="col-sm-4 mb-1 mb-sm-0">Project</label>
-                        <div class="col-sm-8">
-                            <input id="edit-project" class="form-control" list="projects"
-                                aria-describedby="projHelp">
-                            <datalist id="projects">
-                                <option value="project1">
-                                <option value="project2">
-                            </datalist>
-                            <small id="projHelp" class="form-text text-muted">Select existing projects or enter new
-                                one</small>
-                        </div>
+                        <label for="edit-project" class="col-sm-4 mb-1 mb-sm-0">Project*</label>
+                        <select id="edit-project" class="col-sm-8 form-control"></select>
                     </div>
                     <div class="row mb-3 mb-sm-2">
                         <label for="edit-summary" class="col-sm-4 mb-1 mb-sm-0">Summary</label>
