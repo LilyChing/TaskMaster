@@ -19,6 +19,9 @@ const statusInput = document.getElementById("status");
 const memInput = document.getElementById("newMem");
 const memBtn = document.getElementById("addMem");
 const memPlace = document.getElementById("memplace");
+const editAssigneeP = document.getElementById("edit-assignee");
+const defaultAP = document.getElementById("defaultA");
+const teamAP = document.getElementById("teamA");
 
 // create a task manager instance 
 const manager = new TaskManager();
@@ -36,9 +39,9 @@ for (let p = 0; p < manager.projects.length; p++) {
     manager.renderProject(manager.projects[p]);
 }
 
-//render only the first team member into "Assign to" option when it's not log in
-manager.renderAssignee(1);
 function start(){
+    //render only the first team member into "Assign to" option when it's not log in
+    manager.renderAssignee(1);
     loginPlace.style.display = "block";
     teamPlace.setAttribute("style","display:none !important");
     userPlace.style.display = "none";
@@ -104,8 +107,6 @@ function logined(){
         manager.team[0].member = "You";
         manager.isLogin = "false";
         manager.save();
-        //render only the first team member into "Assign to" option when it's not log in
-        manager.renderAssignee(1);
         start();
     };
 }
@@ -142,12 +143,15 @@ createBtn.addEventListener("click", event => {
     //hide modal
     $("#createTask").modal('hide');
     //check if assignee == team member[0], which is myself
+    console.log(assigneeInput.value);
+    console.log(manager.team[0].member);
     if(assigneeInput.value == manager.team[0].member){
-        assigneeInput.value = "You";
+        manager.addTask(projectInput.value, summaryInput.value, descriptionInput.value, dueDateInput.value, "You", statusInput.value);
+    }else{
+        // validate inputs omitted
+        manager.addTask(projectInput.value, summaryInput.value, descriptionInput.value, dueDateInput.value, assigneeInput.value, statusInput.value);
     }
-    // validate inputs omitted
-    manager.addTask(projectInput.value, summaryInput.value, descriptionInput.value, dueDateInput.value, assigneeInput.value, statusInput.value);
-    manager.save();
+        manager.save();
     statusInput.value = "backlog";
     for (const input of [projectInput, summaryInput, descriptionInput, dueDateInput, assigneeInput]) {
         input.value = "";
@@ -175,7 +179,11 @@ editBtn.addEventListener("click", event => {
     let date = edited.dueDate.split("-");
     [date[0], date[2]] = [date[2], date[0]];
     date = date.join("/");
-    editedElement.innerHTML = `<div class="card-body"><div class="row h6 justify-content-between mb-2"><div class="task-title col-11 row flex-wrap">${edited.summary}</div><span class="col-1 text-center deleteBtn"><i class="fa-solid fa-xmark"></i></span></div><span class="project-name bg-primary p-1">${edited.project}</span><div class="row justify-content-between mt-2"><span class="assignee"><i class="fa-solid fa-circle-user"></i> ${edited.assignee}</span><span class="due-date">due: ${date}</span></div></div>`
+    //get member bg color from this.team
+    const memIndex = manager.team.findIndex(object => {
+        return object.member === edited.assignee;
+    });
+    editedElement.innerHTML = `<div class="card-body"><div class="row h6 justify-content-between mb-2"><div class="task-title col-11 row flex-wrap">${edited.summary}</div><span class="col-1 text-center deleteBtn"><i class="fa-solid fa-xmark"></i></span></div><span class="project-name bg-primary p-1">${edited.project}</span><div class="row justify-content-between mt-2"><span class="assignee"><i class="fa-solid fa-circle-user" style="color:${manager.team[memIndex].color};"></i> ${edited.assignee}</span><span class="due-date">due: ${date}</span></div></div>`
     document.getElementById(`${edited.status}Col`).appendChild(editedElement);
     // save change to local storage
     manager.save();

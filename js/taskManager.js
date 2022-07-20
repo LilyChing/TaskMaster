@@ -45,20 +45,20 @@ class TaskManager {
         let date = task.dueDate.split("-");
         [date[0], date[2]] = [date[2], date[0]];
         date = date.join("/");
-        //check if member is "You", which is myself
         //get member bg color from this.team
         const memIndex = this.team.findIndex(object => {
             return object.member === task.assignee;
         });
+        //check if we can find index from this.team, if not, 
         if(memIndex < 0){
             newElement.innerHTML = `<div class="card-body"><div class="row h6 justify-content-between mb-2"><div class="task-title col-11 row flex-wrap">${task.summary}</div><span class="col-1 text-center deleteBtn"><i class="fa-solid fa-xmark"></i></span></div><span class="project-name bg-primary p-1">${task.project}</span><div class="row justify-content-between mt-2"><span class="assignee"><i class="fa-solid fa-circle-user" style="color:#33b5e5;"></i> You</span><span class="due-date">due: ${date}</span></div></div>`
             document.getElementById(`${task.status}Col`).appendChild(newElement);
         }else{
-            console.log(memIndex);
-            console.log(task.assignee);
-            console.log(typeof(task.assignee));
-            console.log(this.team);
-            console.log(this.team[memIndex].color);
+            // console.log(memIndex);
+            // console.log(task.assignee);
+            // console.log(typeof(task.assignee));
+            // console.log(this.team);
+            // console.log(this.team[memIndex].color);
             newElement.innerHTML = `<div class="card-body"><div class="row h6 justify-content-between mb-2"><div class="task-title col-11 row flex-wrap">${task.summary}</div><span class="col-1 text-center deleteBtn"><i class="fa-solid fa-xmark"></i></span></div><span class="project-name bg-primary p-1">${task.project}</span><div class="row justify-content-between mt-2"><span class="assignee"><i class="fa-solid fa-circle-user" style="color:${this.team[memIndex].color};"></i> ${task.assignee}</span><span class="due-date">due: ${date}</span></div></div>`
             document.getElementById(`${task.status}Col`).appendChild(newElement);
         }
@@ -73,6 +73,18 @@ class TaskManager {
             document.getElementById("edit-assignee").value = edited.assignee;
             document.getElementById("edit-status").value = edited.status;
             document.getElementById("editId").value = edited.id;
+            // put original assignee into edit model default option
+                for(var i, j = 0; i = editAssigneeP.options[j]; j++) {
+                    if(i.value == task.assignee) {
+                        editAssigneeP.selectedIndex = j;
+                        return;
+                    }
+                }
+                // const defaultAssignee = document.createElement("option");
+                // defaultAssignee.setAttribute("value", edited.assignee);
+                // defaultAssignee.setAttribute("selected","")
+                // defaultAssignee.innerHTML = edited.assignee;
+                // editAssigneeP.prepend(defaultAssignee);
         });
 
         // add click handler to the child of Task element to "catch" delete click event
@@ -152,11 +164,20 @@ class TaskManager {
         }
         //clear all child before adding
         assigneeInput.innerHTML = '';
+        // render team member into *Create btn* "Assign to" option
         for(let i=0; i<index;i++){
             const newElement = document.createElement("option");
             newElement.setAttribute("value",`${this.team[i].member}`);
             newElement.innerHTML = this.team[i].member;
             assigneeInput.appendChild(newElement);
+        }
+        // render team member into *Edit* "Assign to" option
+        editAssigneeP.innerHTML = '';
+        for(let i=0; i<index;i++){
+            const newElement = document.createElement("option");
+            newElement.setAttribute("value",`${this.team[i].member}`);
+            newElement.innerHTML = this.team[i].member;
+            editAssigneeP.appendChild(newElement);
         }
     }
 

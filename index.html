@@ -217,7 +217,7 @@
 
     <div class="container max-width: 2000px">
         <div class="row align-items-center mt-4">
-            <p class="m-0">Project A</p>
+            <p class="m-0">All Tasks</p>
             <button type="button" class="btn btn-primary rounded-pill ml-1" data-toggle="modal"
                 data-target="#createTask" style="background-color:#809cff; border-color:#809cff;">Create</button>
         </div>
@@ -372,17 +372,11 @@
                         <label for="edit-assignee" class="col-4">
                             <span class="d-none d-sm-inline">Assign to</span>
                             <span class="d-sm-none">
-                                <i class="fa-solid fa-circle-user text-success h4"></i>
-                                <i class="fa-solid fa-circle-user text-danger h4"></i>
-                                <i class="fa-solid fa-circle-user text-primary h4"></i>
+                                <i class="fa-solid fa-circle-user text-dark h4"></i>
                             </span>
                         </label>
-                        <input id="edit-assignee" class="col-8 form-control" list="assignees">
-                        <datalist id="assignees">
-                            <option value="Double">
-                            <option value="Lily">
-                            <option value="Tony">
-                        </datalist>
+                        <select id="edit-assignee" name="edit-assignees" class="col-8 form-control">
+                        </select>
                     </div>
                     <div class="row mb-3 mb-sm-2">
                         <label for="edit-status" class="col-4">Status</label>
