@@ -49,7 +49,7 @@
                             <li><hr class="dropdown-divider"></li>
                             <li id="project-list"></li> <!-- contains existing projects -->
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#" data-toggle="modal" data-target="#addProject">Add
+                            <li><a class="dropdown-item" href="#" data-toggle="modal" data-target=".addProject">Add
                                     project +</a></li>
                             <li><a class="dropdown-item" href="#" data-toggle="modal"
                                     data-target="#removeProject">Remove project</a></li>
@@ -57,7 +57,7 @@
                     </li>
 
                     <!-- add project modal -->
-                    <div class="modal fade" id="addProject" data-backdrop="static" data-keyboard="false" tabindex="-1"
+                    <div class="modal fade addProject" id="addProject" data-backdrop="static" data-keyboard="false" tabindex="-1"
                         aria-labelledby="addProjectModal" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
@@ -113,7 +113,7 @@
                     <!-- end of remove project modal -->
 
                     <form class="form-inline order-lg-last nameplace ml-0 ml-lg-auto">
-                        <div class="teamplace d-flex" style="display: none !important;">
+                        <div class="teamplace d-flex col-12 col-md-auto" style="display: none !important;">
                             <li><span class="navbar-text mr-3 teamname">Guest</span></li>
                             <li class="nav-item  d-flex align-items-center"
                                 style="position: relative !important;width: 90px;">
@@ -177,7 +177,7 @@
                                 <!-- End of team's member Modal -->
                             </li>
                         </div>
-                        <li class="nav-item dropdown ml-5 userplace" style="display: none !important; ">
+                        <li class="nav-item dropdown m-0 ml-md-5 userplace col-12 col-md-auto" style="display: none !important; ">
                             <div class="rounded-circle bg-white" style="height: 50px;width: 50px;" id="userMenuLink"
                                 role="button" data-toggle="dropdown" aria-expanded="false">
                                 <i class="fa-solid fa-circle-user" style="color:#33b5e5;font-size: 50px;"></i>
@@ -240,16 +240,18 @@
         </div>
     </div>
     <!-- End of login Model -->
-
+    <!-- Start of container -->
     <div class="container max-width: 2000px">
         <div class="row align-items-center mt-4">
-            <p class="m-0" id="currentProjText">All Tasks</p>
+            <p class="m-0 mx-3" id="currentProjText">All Tasks</p>
+            <button type="button" class="btn btn-primary rounded-pill ml-1 mr-1" data-toggle="modal"
+                data-target=".addProject" style="background-color:#809cff; border-color:#809cff;">Add Project</button>
             <button type="button" class="btn btn-primary rounded-pill ml-1" data-toggle="modal"
-                data-target="#createTask" style="background-color:#809cff; border-color:#809cff;">Create</button>
+                data-target=".createTask" style="background-color:#809cff; border-color:#809cff;">Create</button>
         </div>
 
         <!-- "create task" modal -->
-        <div class="modal fade" id="createTask" tabindex="-1" aria-labelledby="createTaskLabel" aria-hidden="true">
+        <div class="modal fade createTask" id="createTask" tabindex="-1" aria-labelledby="createTaskLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header align-items-center p-0 p-md-2">
@@ -321,22 +323,15 @@
                 <h4 class="d-none d-md-block">Backlog</h4>
                 <div class="cardCol">
                     <div class="myBlock" id="backlogCol">
-                        <!-- sample task card -->
-                        <div class="card task backlog">
+                        <!-- add task card -->
+                        <a data-toggle="modal" data-target=".createTask">
+                        <div class="card add-task-card">
                             <div class="card-body">
-                                <div class="row h6 justify-content-between mb-2">
-                                    <div class="task-title col-11 row flex-wrap">Sample task</div>
-                                    <span class="col-1 text-right"><i class="fa-solid fa-xmark"></i></span>
-                                </div>
-                                <span class="project-name bg-primary p-1">Task Master</span>
-                                <div class="row justify-content-between mt-2">
-                                    <span class="assignee"><i class="fa-solid fa-circle-user text-warning"></i>
-                                        Tony</span>
-                                    <span class="due-date">due: 18/7/2022</span>
-                                </div>
+                                <h4 class="m-0">+</h4>
                             </div>
                         </div>
-                        <!-- end of sample task card  -->
+                        </a>
+                        <!-- end of add task card  -->
                     </div>
                 </div>
             </div>

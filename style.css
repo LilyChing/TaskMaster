@@ -5,7 +5,7 @@ body {
     height: 100vh;
 
 }
-@media only screen and (max-width: 575px) {
+@media only screen and (max-width: 767px) {
     body {
         -ms-overflow-style: none;  /* IE and Edge */
         scrollbar-width: none;  /* Firefox */
@@ -126,7 +126,11 @@ body {
 .memList {
     align-items: center;
 }
-
+/* Add task card */
+.add-task-card:hover{
+    background-color: #D3D2FF;
+    transition: background-color 0.2s ease;
+}
 /* mobile tabs */
 #backlogTab,
 #to-doTab,

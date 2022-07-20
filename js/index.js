@@ -105,6 +105,10 @@ function logined() {
     logoutbtn.onclick = function () {
         alert("Logout successfully");
         manager.team[0].member = "You";
+        //When it loged out, remove all member except myself in add member modal
+        for(let i = 1; i < manager.team.length; i++){
+            memPlace.removeChild(memPlace.lastChild);
+        }
         manager.isLogin = "false";
         manager.save();
         start();
