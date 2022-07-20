@@ -3,7 +3,7 @@ body {
     background-size: cover;
     object-fit: cover;
     height: 100vh;
-    /*overflow: hidden;*/
+
 }
 
 
@@ -23,6 +23,12 @@ body {
     width: 100%;
     border: 3px solid #7F6C9D;
     border-radius: 18px;
+    box-shadow: 0 4px 8px 0 #a294b9;
+    transition: 0.3s;
+}
+
+.cardCol:hover {
+    box-shadow: 0 8px 16px 0 #a294b9;
 }
 
 /* reset bootstrap row and col spacing  */
@@ -103,21 +109,26 @@ body {
     color: lightgrey;
 }
 
-.container{
+.container {
     max-width: 1300px;
 
 }
+
 /* add team's member Modal */
 .memList {
     align-items: center;
 }
 
 /* mobile tabs */
-#backlogTab, #to-doTab, #doingTab, #doneTab {
+#backlogTab,
+#to-doTab,
+#doingTab,
+#doneTab {
     border-radius: 10px 10px 0 0;
     border: 1px solid transparent;
     cursor: pointer;
-    background-color: #7F6C9D; /* default colour, subject to initialization and change*/
+    background-color: #7F6C9D;
+    /* default colour, subject to initialization and change*/
 }
 
 @media only screen and (max-width: 576px) {
@@ -126,9 +137,38 @@ body {
         border-color: #A8A6FF;
         border-top: 20px solid #A8A6FF;
     }
+
     .container {
         padding: 0;
     }
+}
+
+/* famous people saying */
+.headT {
+    margin-top: 20px;
+}
+
+.center {
+    text-align: center;
+}
+
+.right {
+    position: absolute;
+    right: 24%;
+}
+
+.card2 {
+    padding: 0 !important;
+    border-radius: 0 !important;
+    text-align: center;
+}
+
+.cardfont {
+    font-size: 1.3rem !important;
+    color: #4304a8;
+    text-shadow: 3px 3px 3px #ababab;
+    font-family: "Sofia", sans-serif;
+    font-style: oblique;
 }
 
 /* footer */

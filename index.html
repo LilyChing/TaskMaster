@@ -14,8 +14,10 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Our own CSS -->
     <link rel="stylesheet" href="./style.css">
-    <title>Document</title>
-    
+    <!-- font family of famous quotes in english -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+    <title>TaskMaster</title>
+
 </head>
 
 <body>
@@ -43,15 +45,20 @@
                             Project
                         </a>
                         <ul class="dropdown-menu">
-                            <li id="project-list"></li>  <!-- contains existing projects -->
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#" data-toggle="modal" data-target="#addProject">Add project +</a></li>
-                            <li><a class="dropdown-item" href="#" data-toggle="modal" data-target="#removeProject">Remove project</a></li>
+                            <li id="project-list"></li> <!-- contains existing projects -->
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#" data-toggle="modal" data-target="#addProject">Add
+                                    project +</a></li>
+                            <li><a class="dropdown-item" href="#" data-toggle="modal"
+                                    data-target="#removeProject">Remove project</a></li>
                         </ul>
                     </li>
 
-                    <!-- add project modal --> 
-                    <div class="modal fade" id="addProject" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="addProjectModal" aria-hidden="true">
+                    <!-- add project modal -->
+                    <div class="modal fade" id="addProject" data-backdrop="static" data-keyboard="false" tabindex="-1"
+                        aria-labelledby="addProjectModal" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -61,20 +68,24 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <input id="addProjectInput" class="form-control" placeholder="Enter new project name" maxlength="50">
+                                    <input id="addProjectInput" class="form-control"
+                                        placeholder="Enter new project name" maxlength="50">
                                     <small id="addProjWarning" class="form-text text-danger"></small>
                                 </div>
                                 <div class="modal-footer d-flex justify-content-between">
-                                    <button id="cancelAddProj" class="btn btn-secondary rounded-pill" data-dismiss="modal">Cancel</button>
-                                    <button id="addProjBtn" type="button" class="btn btn-primary rounded-pill">Add</button>
+                                    <button id="cancelAddProj" class="btn btn-secondary rounded-pill"
+                                        data-dismiss="modal">Cancel</button>
+                                    <button id="addProjBtn" type="button"
+                                        class="btn btn-primary rounded-pill">Add</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!-- end of add project modal -->
-                    
-                    <!-- remove project modal --> 
-                    <div class="modal fade" id="removeProject" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="removeProjectModal" aria-hidden="true">
+
+                    <!-- remove project modal -->
+                    <div class="modal fade" id="removeProject" data-backdrop="static" data-keyboard="false"
+                        tabindex="-1" aria-labelledby="removeProjectModal" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -93,7 +104,8 @@
                                     <small id="removeProjSuccess" class="form-text text-success"></small>
                                 </div>
                                 <div class="modal-footer d-flex justify-content-center">
-                                    <button id="finishRemove" class="btn btn-secondary rounded-pill" data-dismiss="modal">Finished</button>
+                                    <button id="finishRemove" class="btn btn-secondary rounded-pill"
+                                        data-dismiss="modal">Finished</button>
                                 </div>
                             </div>
                         </div>
@@ -101,59 +113,73 @@
                     <!-- end of remove project modal -->
 
                     <form class="form-inline order-lg-last nameplace ml-0 ml-lg-auto">
-                    <div class="teamplace d-flex" style="display: none !important;">
-                        <li><span class="navbar-text mr-3 teamname">Guest</span></li>
-                        <li class="nav-item  d-flex align-items-center" style="position: relative !important;width: 90px;">
-                                <div class="rounded-circle bg-success" style="height: 40px;width: 40px; z-index: 4;"></div>
-                                <div class="rounded-circle bg-warning" style="height: 40px;width: 40px;position: absolute;left: 15px;z-index: 3;"></div>
-                                <div class="rounded-circle bg-danger" style="height: 40px;width: 40px;position: absolute;left: 30px;z-index: 2;"></div>
-                                <div class="rounded-circle bg-secondary" style="height: 40px;width: 40px;position: absolute;left: 45px;"></div>
-                        </li>
-                        <li>
-                            <button type="button" class="btn p-0" data-toggle="modal" data-target="#teamModal" style="font-size: 30px;">
-                                +
-                            </button>
-                            <!-- add team's member Modal -->
-                                <div class="modal fade" id="teamModal" tabindex="-1" aria-labelledby="teamModalLabel" aria-hidden="true">
+                        <div class="teamplace d-flex" style="display: none !important;">
+                            <li><span class="navbar-text mr-3 teamname">Guest</span></li>
+                            <li class="nav-item  d-flex align-items-center"
+                                style="position: relative !important;width: 90px;">
+                                <div class="rounded-circle bg-success" style="height: 40px;width: 40px; z-index: 4;">
+                                </div>
+                                <div class="rounded-circle bg-warning"
+                                    style="height: 40px;width: 40px;position: absolute;left: 15px;z-index: 3;"></div>
+                                <div class="rounded-circle bg-danger"
+                                    style="height: 40px;width: 40px;position: absolute;left: 30px;z-index: 2;"></div>
+                                <div class="rounded-circle bg-secondary"
+                                    style="height: 40px;width: 40px;position: absolute;left: 45px;"></div>
+                            </li>
+                            <li>
+                                <button type="button" class="btn p-0" data-toggle="modal" data-target="#teamModal"
+                                    style="font-size: 30px;">
+                                    +
+                                </button>
+                                <!-- add team's member Modal -->
+                                <div class="modal fade" id="teamModal" tabindex="-1" aria-labelledby="teamModalLabel"
+                                    aria-hidden="true">
                                     <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                        <h5 class="modal-title" id="teamModalLabel">Add Team member</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                        </div>
-                                        <div class="modal-body" id="memplace">
-                                            <div class="row mb-4 input-group" >
-                                                <input type="text" class=" form-control" id="newMem" placeholder="Add user into your team..." aria-describedby="button-addon">
-                                                <div class="input-group-append">
-                                                <button type="button" class="btn border mb-1 mb-sm-0 px-4 py-0" id="addMem" style="font-size: 30px;">
-                                                    +
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="teamModalLabel">Add Team member</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
                                                 </button>
+                                            </div>
+                                            <div class="modal-body" id="memplace">
+                                                <div class="row mb-4 input-group">
+                                                    <input type="text" class=" form-control" id="newMem"
+                                                        placeholder="Add user into your team..."
+                                                        aria-describedby="button-addon">
+                                                    <div class="input-group-append">
+                                                        <button type="button" class="btn border mb-1 mb-sm-0 px-4 py-0"
+                                                            id="addMem" style="font-size: 30px;">
+                                                            +
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-2 memList">
+                                                    <div class="rounded-circle bg-white mr-2"
+                                                        style="height: 40px;width: 40px;">
+                                                        <i class="fa-solid fa-circle-user"
+                                                            style="color:#33b5e5;font-size: 40px;"></i>
+                                                    </div>
+                                                    <div id="memListTop">Guest</div>
+                                                    <div class="col-sm-2 text-center">Owner</div>
                                                 </div>
                                             </div>
-                                            <div class="row mb-2 memList" >
-                                                <div class="rounded-circle bg-white mr-2" style="height: 40px;width: 40px;">
-                                                    <i class="fa-solid fa-circle-user" style="color:#33b5e5;font-size: 40px;"></i>
-                                                </div>
-                                                <div id="memListTop">Guest</div>
-                                                <div class="col-sm-2 text-center">Owner</div>
+                                            <div class="modal-footer justify-content-between">
+                                                <button type="button" class="btn btn-secondary rounded-pill">Share
+                                                    link</button>
+                                                <button type="button" class="btn btn-primary rounded-pill"
+                                                    data-dismiss="modal">Done</button>
                                             </div>
                                         </div>
-                                        <div class="modal-footer justify-content-between">
-                                        <button type="button" class="btn btn-secondary rounded-pill">Share link</button>
-                                        <button type="button" class="btn btn-primary rounded-pill" data-dismiss="modal">Done</button>
-                                        </div>
-                                    </div>
                                     </div>
                                 </div>
-                            <!-- End of team's member Modal -->
-                        </li>
+                                <!-- End of team's member Modal -->
+                            </li>
                         </div>
                         <li class="nav-item dropdown ml-5 userplace" style="display: none !important; ">
-                            <div class="rounded-circle bg-white"
-                                style="height: 50px;width: 50px;" id="userMenuLink" role="button" data-toggle="dropdown"
-                                aria-expanded="false">
+                            <div class="rounded-circle bg-white" style="height: 50px;width: 50px;" id="userMenuLink"
+                                role="button" data-toggle="dropdown" aria-expanded="false">
                                 <i class="fa-solid fa-circle-user" style="color:#33b5e5;font-size: 50px;"></i>
                             </div>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userMenuLink">
@@ -295,21 +321,22 @@
                 <h4 class="d-none d-sm-block">Backlog</h4>
                 <div class="cardCol">
                     <div class="myBlock" id="backlogCol">
-                   <!-- sample task card -->
-                    <div class="card task backlog">
-                        <div class="card-body">
-                            <div class="row h6 justify-content-between mb-2">
-                                <div class="task-title col-11 row flex-wrap">Sample task</div>
-                                <span class="col-1 text-right"><i class="fa-solid fa-xmark"></i></span>
-                            </div>
-                            <span class="project-name bg-primary p-1">Task Master</span>
-                            <div class="row justify-content-between mt-2">
-                                <span class="assignee"><i class="fa-solid fa-circle-user text-warning"></i> Tony</span>
-                                <span class="due-date">due: 18/7/2022</span>
+                        <!-- sample task card -->
+                        <div class="card task backlog">
+                            <div class="card-body">
+                                <div class="row h6 justify-content-between mb-2">
+                                    <div class="task-title col-11 row flex-wrap">Sample task</div>
+                                    <span class="col-1 text-right"><i class="fa-solid fa-xmark"></i></span>
+                                </div>
+                                <span class="project-name bg-primary p-1">Task Master</span>
+                                <div class="row justify-content-between mt-2">
+                                    <span class="assignee"><i class="fa-solid fa-circle-user text-warning"></i>
+                                        Tony</span>
+                                    <span class="due-date">due: 18/7/2022</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- end of sample task card  -->
+                        <!-- end of sample task card  -->
                     </div>
                 </div>
             </div>
@@ -335,6 +362,13 @@
                 </div>
             </div>
         </div>
+        <!-- testing -->
+        <div class="container theme-showcase headT" role="main">
+            <div class="card-body card2" onclick="changeWord()">
+                <h2 id="word" class="cardfont">[Knowing yourself is the beginning of all wisdom. --Aristotle]</h2>
+            </div>
+        </div>
+        <!-- testing -->
     </div> <!-- end of container -->
 
     <!-- edit task modal -->
@@ -387,7 +421,7 @@
                             <option value="done">done</option>
                         </select>
                     </div>
-                    <input id="editId" type="text" class="d-none">  <!-- to store the id of the task being edited -->
+                    <input id="editId" type="text" class="d-none"> <!-- to store the id of the task being edited -->
                 </div>
                 <div class="modal-footer d-flex justify-content-between">
                     <button class="btn btn-secondary rounded-pill" data-dismiss="modal">Cancel</button>
@@ -395,7 +429,7 @@
                 </div>
             </div>
         </div>
-    </div>    
+    </div>
     <!-- end of edit task modal -->
 
     <!-- footer -->

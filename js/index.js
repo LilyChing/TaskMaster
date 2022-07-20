@@ -39,17 +39,17 @@ for (let p = 0; p < manager.projects.length; p++) {
     manager.renderProject(manager.projects[p]);
 }
 
-function start(){
+function start() {
     //render only the first team member into "Assign to" option when it's not log in
     manager.renderAssignee(1);
     loginPlace.style.display = "block";
-    teamPlace.setAttribute("style","display:none !important");
+    teamPlace.setAttribute("style", "display:none !important");
     userPlace.style.display = "none";
 }
 start();
 
 // Start of login function: check if user is logined
-if (manager.isLogin == false){
+if (manager.isLogin == false) {
     // Below function Executes on submit of login form.
     loginform.addEventListener("submit", (event) => {
         event.preventDefault(); // //stop form from submitting
@@ -57,10 +57,10 @@ if (manager.isLogin == false){
         checkPW = document.getElementById("checkpw").value;
         if (checkPW == "taskmaster") {
             // If user type in their name, use sessionStorage to store username, otherwise, store "Guest"
-            if (!checkUName){
+            if (!checkUName) {
                 manager.team[0].member = "Guest";
                 manager.save();
-            }else{
+            } else {
                 manager.team[0].member = checkUName;
                 manager.save();
             }
@@ -68,7 +68,7 @@ if (manager.isLogin == false){
             logined();
         } else {
             attempt--; // Decrementing by one.
-            document.getElementById("warning").innerHTML = "Wrong Username or Password. You have left "+ attempt + " attempt.";
+            document.getElementById("warning").innerHTML = "Wrong Username or Password. You have left " + attempt + " attempt.";
             // Disabling fields after 3 attempts.
             if (attempt == 0) {
                 document.getElementById("checkuname").disabled = true;
@@ -78,11 +78,11 @@ if (manager.isLogin == false){
             }
         }
     });
-}else{
+} else {
     logined();
 }
 // after you login successfully, run this
-function logined(){
+function logined() {
     //update login status to true
     manager.isLogin = "true";
     manager.save();
@@ -94,15 +94,15 @@ function logined(){
     }
     $('#loginModal').modal('hide');
     loginPlace.style.display = "none";
-    teamPlace.removeAttribute("style","display:none !important");
+    teamPlace.removeAttribute("style", "display:none !important");
     userPlace.style.display = "block";
     const teamName = document.querySelector(".teamname");
     teamName.innerHTML = `${manager.team[0].member}'s Team`;
     document.getElementById("memListTop").innerHTML = `${manager.team[0].member}`;
     const logoutbtn = document.querySelector(".logout");
-    logoutbtn.setAttribute("type","button");
+    logoutbtn.setAttribute("type", "button");
     //this btn control what happen when loged out
-    logoutbtn.onclick = function() {
+    logoutbtn.onclick = function () {
         alert("Logout successfully");
         manager.team[0].member = "You";
         manager.isLogin = "false";
@@ -118,25 +118,25 @@ createBtn.addEventListener("click", event => {
     //Validation
     //if there is no input, change bg color to pink and return to white after click
     const inputList = [projectInput, summaryInput, dueDateInput, assigneeInput];
-    for (let i=0; i<inputList.length;i++) {
-        if(!inputList[i].value){
-            inputList[i].style.backgroundColor= "LightPink";
-            inputList[i].addEventListener("click",function() {
-                inputList[i].style.backgroundColor= "white";
+    for (let i = 0; i < inputList.length; i++) {
+        if (!inputList[i].value) {
+            inputList[i].style.backgroundColor = "LightPink";
+            inputList[i].addEventListener("click", function () {
+                inputList[i].style.backgroundColor = "white";
             });
         }
     }
     //After the for loop is finished,if no input/summary>50 letters, alert and return
-    if (!projectInput.value || !summaryInput.value || !dueDateInput.value || !assigneeInput.value){
+    if (!projectInput.value || !summaryInput.value || !dueDateInput.value || !assigneeInput.value) {
         alert(`You have missing input.`);
         return;
     }
-    if(summaryInput.value.length > 50){
+    if (summaryInput.value.length > 50) {
         alert(`Please type in your summary not longer than 50 letters.`);
         summaryInput.value = "";
-        summaryInput.style.backgroundColor= "LightPink";
-        summaryInput.addEventListener("click",function() {
-            summaryInput.style.backgroundColor= "white";
+        summaryInput.style.backgroundColor = "LightPink";
+        summaryInput.addEventListener("click", function () {
+            summaryInput.style.backgroundColor = "white";
         });
         return;
     }
@@ -145,13 +145,13 @@ createBtn.addEventListener("click", event => {
     //check if assignee == team member[0], which is myself
     console.log(assigneeInput.value);
     console.log(manager.team[0].member);
-    if(assigneeInput.value == manager.team[0].member){
+    if (assigneeInput.value == manager.team[0].member) {
         manager.addTask(projectInput.value, summaryInput.value, descriptionInput.value, dueDateInput.value, "You", statusInput.value);
-    }else{
+    } else {
         // validate inputs omitted
         manager.addTask(projectInput.value, summaryInput.value, descriptionInput.value, dueDateInput.value, assigneeInput.value, statusInput.value);
     }
-        manager.save();
+    manager.save();
     statusInput.value = "backlog";
     for (const input of [projectInput, summaryInput, descriptionInput, dueDateInput, assigneeInput]) {
         input.value = "";
@@ -254,13 +254,13 @@ newProjInput.addEventListener("input", event => document.getElementById("addProj
 
 // set click handlers to reset project name input when modal is closed
 document.getElementById("cancelAddProj").addEventListener("click", event => {
-     document.getElementById("addProjectInput").value = "";
-     document.getElementById("addProjWarning").innerHTML = "";
+    document.getElementById("addProjectInput").value = "";
+    document.getElementById("addProjWarning").innerHTML = "";
 });
 
 document.querySelector("#addProject .close").addEventListener("click", event => {
-     document.getElementById("addProjectInput").value = "";
-     document.getElementById("addProjWarning").innerHTML = "";
+    document.getElementById("addProjectInput").value = "";
+    document.getElementById("addProjWarning").innerHTML = "";
 });
 /* end of add project */
 
@@ -282,7 +282,7 @@ removeProjOpener.addEventListener("click", event => {
 // set click listener for remove project button
 const removeProjBtn = document.getElementById("removeProjBtn");
 removeProjBtn.addEventListener("click", event => {
-    if (! confirm("All tasks under this project will be deleted, are you sure?")) {return;}
+    if (!confirm("All tasks under this project will be deleted, are you sure?")) { return; }
     //remove from manager
     const removed = removeProjList.value;
     const removeIndex = manager.projects.indexOf(removed);
@@ -327,12 +327,12 @@ document.querySelector("#removeProject .close").addEventListener("click", event 
 
 
 //set click listener for add member button
-memBtn.addEventListener("click", function() {
-    if (!memInput.value){
+memBtn.addEventListener("click", function () {
+    if (!memInput.value) {
         alert(`Please input new member's name.`);
-        memInput.style.backgroundColor= "LightPink";
-        memInput.addEventListener("click",function() {
-            memInput.style.backgroundColor= "white";
+        memInput.style.backgroundColor = "LightPink";
+        memInput.addEventListener("click", function () {
+            memInput.style.backgroundColor = "white";
         });
         return;
     }
@@ -340,7 +340,7 @@ memBtn.addEventListener("click", function() {
     manager.addMem(memInput.value);
     manager.save();
     manager.renderAssignee();
-    memInput.value ="";
+    memInput.value = "";
     console.log(manager.team);
 });
 
@@ -355,16 +355,16 @@ for (const col of ["backlogCol", "to-doCol", "doingCol", "doneCol"]) {
 
     block.addEventListener("drop", event => {
         event.preventDefault(); // to allow drop
-        
+
         // if a task is dropped in the task block, the task will be added to the end
         const draggedId = event.dataTransfer.getData("text/id");
         const dragged = document.getElementById(draggedId);
         event.currentTarget.appendChild(dragged);
-        
+
         // change the status class of the dropped task, for styling
         const status = col.replace("Col", "");
         dragged.setAttribute("Class", `card ${status}`);
-        
+
         // update the status of the dropped task object in TaskManager
         const taskId = draggedId.replace("task", "");
         manager.getTaskById(parseInt(taskId)).status = status;
@@ -399,3 +399,21 @@ for (const tab of tabList) {
     });
 }
 /* end of mobile tab interface */
+
+//testing
+var words = new Array();
+words[0] = "[Cease to struggle and you cease to live. --Thomas Carlyle]";
+words[1] = "[Behind every successful man there is a lot unsuccessful years. --Bob Brown]";
+words[2] = "[Genius is one percent inspiration, ninety-nine percent perspiration. --Thomas A. Edison]";
+words[3] = "[You must be the change you wish to see in the world. --Mohandas Gandhi]";
+words[4] = "[We shall show mercy, but we shall not ask for it. --Winston Churchill]";
+words[5] = "[Life is like riding a bicycle. To keep your balance, you must keep moving. --Albert Einstein]";
+words[6] = "[You’ll never find a rainbow if you’re looking down. --Charlie Chaplin]";
+words[7] = "[You’ve got to find what you love. --Steve Jobs]";
+words[8] = "[The only true wisdom is in knowing you know nothing. --Socrates]";
+words[9] = "[Be kind, for everyone you meet is fighting a hard battle. --Plato]";
+
+function changeWord() {
+    var num = Math.floor(Math.random() * 10);
+    document.getElementById("word").innerHTML = words[num];;
+}
