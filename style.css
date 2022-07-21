@@ -1,8 +1,9 @@
 body {
-    background-image: url(./image/16.png);
+    background: linear-gradient(#bacaff,#ced1ff,#cfcaff,#f7d8ff,#ffe0e4,#fff5ddf3);
     background-size: cover;
     object-fit: cover;
     height: 100vh;
+    
 
 }
 @media only screen and (max-width: 767px) {
@@ -29,16 +30,27 @@ body {
     min-height: 200px;
     height: 500px;
     width: 100%;
-    border: 3px solid #7F6C9D;
+    border: 3px solid #b9e2ff;
     border-radius: 18px;
     box-shadow: 0 4px 8px 0 #a294b9;
     transition: 0.3s;
+    background: #f7fcff;
+    
 }
+
 
 .cardCol:hover {
     box-shadow: 0 8px 16px 0 #a294b9;
 }
 
+.cardFont{
+    text-shadow:2px 4px 3px #a294b9;
+    color:#555454;
+    font-size:x-large;
+    letter-spacing: 3px;
+    font-style:oblique;
+    font-weight:400;
+}
 /* reset bootstrap row and col spacing  */
 .row {
     margin: 0;
@@ -71,17 +83,17 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-    border: 2px solid #7F6C9D;
+    border: 2px solid #acb4ff;
     border-radius: 0 25px 25px 0;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #7F6C9D;
+    background: #acb4ff;
     border-radius: 0 25px 25px 0;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #7652b1;
+    background: #97a1fc;
 }
 
 /* srollbar end */
@@ -98,19 +110,19 @@ body {
 }
 
 .backlog {
-    border-left: 10px solid #A8A6FF;
+    border-left: 10px solid #a1bfff;
 }
 
 .to-do {
-    border-left: 10px solid #FF96B5;
+    border-left: 10px solid #e4b6fa;
 }
 
 .doing {
-    border-left: 10px solid #FFF850;
+    border-left: 10px solid #ffd3aef3;
 }
 
 .done {
-    border-left: 10px solid #A9ED74;
+    border-left: 10px solid #bef3a6;
 }
 
 .deleteBtn:hover {
@@ -157,7 +169,7 @@ body {
 
 /* famous people saying */
 .headT {
-    margin-top: 20px;
+    margin-top: 40px;
 }
 
 .center {
