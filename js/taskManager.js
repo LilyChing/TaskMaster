@@ -1,5 +1,5 @@
-
 // main class for task management
+
 class TaskManager {
     constructor() {
         this.tasks = [];
@@ -45,6 +45,14 @@ class TaskManager {
         // reformat due date from "yyyy-mm-dd" to "dd/mm/yyyy"
         let date = task.dueDate.split("-");
         [date[0], date[2]] = [date[2], date[0]];
+        // intermeditae step: determine whether the task is overdue
+        let overdue = false;
+        let today = new Date();
+        today = today.toLocaleDateString('en-GB').split("/");
+        if (parseInt(date[2]) < parseInt(today[2])) {overdue = true;}
+        else if (parseInt(date[2]) === parseInt(today[2]) && parseInt(date[1]) < parseInt(today[1])) {overdue = true;}
+        else if (parseInt(date[2]) === parseInt(today[2]) && parseInt(date[1]) === parseInt(today[1]) && parseInt(date[0]) < parseInt(today[0])) {overdue = true;}
+        // finish reformat
         date = date.join("/");
 
         //get member bg color from this.team
@@ -59,7 +67,7 @@ class TaskManager {
 
         //check if we can find index from this.team, if not, render "you"
         if(memIndex < 0){
-            newElement.innerHTML = `<div class="card-body"><div class="row h6 justify-content-between mb-2"><div class="task-title col-11 row flex-wrap">${task.summary}</div><span class="col-1 text-center deleteBtn"><i class="fa-solid fa-xmark"></i></span></div><span class="project-name bg-primary p-1">${task.project}</span><div class="row justify-content-between mt-2"><span class="assignee"><i class="fa-solid fa-circle-user" style="color:#33b5e5;"></i> You</span><span class="due-date">due: ${date}</span></div></div>`
+            newElement.innerHTML = `<div class="card-body"><div class="row h6 justify-content-between mb-2"><div class="task-title col-11 row flex-wrap">${task.summary}</div><span class="col-1 text-center deleteBtn"><i class="fa-solid fa-xmark"></i></span></div><span class="project-name bg-primary p-1">${task.project}</span><div class="row justify-content-between mt-2"><span class="assignee"><i class="fa-solid fa-circle-user" style="color:#33b5e5;"></i> You</span><span class="due-date"><i class="fa-solid fa-clock"></i> ${date}</span></div></div>`;
             document.getElementById(`${task.status}Col`).appendChild(newElement);
         }else{
             // console.log(memIndex);
@@ -67,9 +75,15 @@ class TaskManager {
             // console.log(typeof(task.assignee));
             // console.log(this.team);
             // console.log(this.team[memIndex].color);
-            newElement.innerHTML = `<div class="card-body"><div class="row h6 justify-content-between mb-2"><div class="task-title col-11 row flex-wrap">${task.summary}</div><span class="col-1 text-center deleteBtn"><i class="fa-solid fa-xmark"></i></span></div><span class="project-name bg-primary p-1">${task.project}</span><div class="row justify-content-between mt-2"><span class="assignee"><i class="fa-solid fa-circle-user" style="color:${this.team[memIndex].color};"></i> ${task.assignee}</span><span class="due-date">due: ${date}</span></div></div>`
+            newElement.innerHTML = `<div class="card-body"><div class="row h6 justify-content-between mb-2"><div class="task-title col-11 row flex-wrap">${task.summary}</div><span class="col-1 text-center deleteBtn"><i class="fa-solid fa-xmark"></i></span></div><span class="project-name p-1">${task.project}</span><div class="row justify-content-between mt-2"><span class="assignee"><i class="fa-solid fa-circle-user" style="color:${this.team[memIndex].color};"></i> ${task.assignee}</span><span class="due-date"><i class="fa-solid fa-clock"></i> ${date}</span></div></div>`;
             document.getElementById(`${task.status}Col`).appendChild(newElement);
         }
+
+        // style the due date for overdue tasks
+        if (overdue && task.status !== "done") {
+            document.querySelector(`#${newElement.id} .due-date`).style.color = overdueColor;
+        }
+        else {document.querySelector(`#${newElement.id} .due-date`).style.color = "";}
 
         // add click handler to set edit modal values
         newElement.addEventListener("click", event => {
@@ -129,6 +143,19 @@ class TaskManager {
             // change the status class of the dropped task, for styling
             const status = parent.getAttribute("id").replace("Col", "");
             dragged.setAttribute("Class", `card ${status}`);
+
+            // check whether task is overdue and apply style
+            let overdue = false;
+            let date = document.querySelector(`#${draggedId} .due-date`).innerHTML.replace('<i class="fa-solid fa-clock"></i> ', "").split("/");
+            let today = new Date();
+            today = today.toLocaleDateString('en-GB').split("/");
+            if (parseInt(date[2]) < parseInt(today[2])) {overdue = true;}
+            else if (parseInt(date[2]) === parseInt(today[2]) && parseInt(date[1]) < parseInt(today[1])) {overdue = true;}
+            else if (parseInt(date[2]) === parseInt(today[2]) && parseInt(date[1]) === parseInt(today[1]) && parseInt(date[0]) < parseInt(today[0])) {overdue = true;}
+            if (overdue && status !== "done") {
+                document.querySelector(`#${draggedId} .due-date`).style.color = overdueColor;
+            }
+            else {document.querySelector(`#${draggedId} .due-date`).style.color = "";}
             
             // update the status of the dropped task object in TaskManager
             const taskId = draggedId.replace("task", "");

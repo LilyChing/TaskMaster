@@ -129,6 +129,10 @@ body {
     color: lightgrey;
 }
 
+.project-name {
+    background-color: #F0F0F0;
+}
+
 .container {
     max-width: 1300px;
 
