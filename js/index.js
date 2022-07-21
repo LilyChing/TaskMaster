@@ -23,6 +23,9 @@ const editAssigneeP = document.getElementById("edit-assignee");
 const defaultAP = document.getElementById("defaultA");
 const teamAP = document.getElementById("teamA");
 
+// variable: overdue color
+const overdueColor = "#c99b9b";
+
 // create a task manager instance 
 const manager = new TaskManager();
 
@@ -91,6 +94,7 @@ if (manager.isLogin == false) {
 } else {
     logined();
 }
+
 // after you login successfully, run this
 function logined() {
     //update login status to true
@@ -124,6 +128,7 @@ function logined() {
         start();
     };
 }
+
 
 /* javascript for managing tasks */
 
@@ -194,19 +199,33 @@ editBtn.addEventListener("click", event => {
     // reformat due date from "yyyy-mm-dd" to "dd/mm/yyyy"
     let date = edited.dueDate.split("-");
     [date[0], date[2]] = [date[2], date[0]];
+    // intermeditae step: determine whether the task is overdue  //added
+    let overdue = false;
+    let today = new Date();
+    today = today.toLocaleDateString('en-GB').split("/");
+    if (parseInt(date[2]) < parseInt(today[2])) {overdue = true;}
+    else if (parseInt(date[2]) === parseInt(today[2]) && parseInt(date[1]) < parseInt(today[1])) {overdue = true;}
+    else if (parseInt(date[2]) === parseInt(today[2]) && parseInt(date[1]) === parseInt(today[1]) && parseInt(date[0]) < parseInt(today[0])) {overdue = true;}
+    // finish reformat
     date = date.join("/");
     
     //get member bg color from this.team
     const memIndex = manager.team.findIndex(object => {
         return object.member === edited.assignee;
     });
-    editedElement.innerHTML = `<div class="card-body"><div class="row h6 justify-content-between mb-2"><div class="task-title col-11 row flex-wrap">${edited.summary}</div><span class="col-1 text-center deleteBtn"><i class="fa-solid fa-xmark"></i></span></div><span class="project-name bg-primary p-1">${edited.project}</span><div class="row justify-content-between mt-2"><span class="assignee"><i class="fa-solid fa-circle-user" style="color:${manager.team[memIndex].color};"></i> ${edited.assignee}</span><span class="due-date">due: ${date}</span></div></div>`
+    editedElement.innerHTML = `<div class="card-body"><div class="row h6 justify-content-between mb-2"><div class="task-title col-11 row flex-wrap">${edited.summary}</div><span class="col-1 text-center deleteBtn"><i class="fa-solid fa-xmark"></i></span></div><span class="project-name p-1">${edited.project}</span><div class="row justify-content-between mt-2"><span class="assignee"><i class="fa-solid fa-circle-user" style="color:${manager.team[memIndex].color};"></i> ${edited.assignee}</span><span class="due-date"><i class="fa-solid fa-clock"></i> ${date}</span></div></div>`;
     document.getElementById(`${edited.status}Col`).appendChild(editedElement);
     
     // determine show/hide when edit under project filter
     if (document.getElementById("currentProjText").innerHTML !== "All Tasks" && document.getElementById("currentProjText").innerHTML !== edited.status) {
         editedElement.style.display = "none";
     }
+
+    // style the due date for overdue tasks
+    if (overdue && edited.status !== "done") {
+        document.querySelector(`#${editedElement.id} .due-date`).style.color = overdueColor;
+    }
+    else {document.querySelector(`#${editedElement.id} .due-date`).style.color = "";}
     
     // add delete handler to re-rendered delete button
     const deleteCatcher = document.querySelector(`#${editedElement.id} .card-body`);
@@ -413,6 +432,19 @@ for (const col of ["backlogCol", "to-doCol", "doingCol", "doneCol"]) {
         // change the status class of the dropped task, for styling
         const status = col.replace("Col", "");
         dragged.setAttribute("Class", `card ${status}`);
+
+        // check whether task is overdue and apply style
+        let overdue = false;
+        let date = document.querySelector(`#${draggedId} .due-date`).innerHTML.replace('<i class="fa-solid fa-clock"></i> ', "").split("/");
+        let today = new Date();
+        today = today.toLocaleDateString('en-GB').split("/");
+        if (parseInt(date[2]) < parseInt(today[2])) {overdue = true;}
+        else if (parseInt(date[2]) === parseInt(today[2]) && parseInt(date[1]) < parseInt(today[1])) {overdue = true;}
+        else if (parseInt(date[2]) === parseInt(today[2]) && parseInt(date[1]) === parseInt(today[1]) && parseInt(date[0]) < parseInt(today[0])) {overdue = true;}
+        if (overdue && status !== "done") {
+            document.querySelector(`#${draggedId} .due-date`).style.color = overdueColor;
+        }
+        else {document.querySelector(`#${draggedId} .due-date`).style.color = "";}
 
         // update the status of the dropped task object in TaskManager
         const taskId = draggedId.replace("task", "");
