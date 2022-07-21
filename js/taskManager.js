@@ -67,7 +67,7 @@ class TaskManager {
 
         //check if we can find index from this.team, if not, render "you"
         if(memIndex < 0){
-            newElement.innerHTML = `<div class="card-body"><div class="row h6 justify-content-between mb-2"><div class="task-title col-11 row flex-wrap">${task.summary}</div><span class="col-1 text-center deleteBtn"><i class="fa-solid fa-xmark"></i></span></div><span class="project-name bg-primary p-1">${task.project}</span><div class="row justify-content-between mt-2"><span class="assignee"><i class="fa-solid fa-circle-user" style="color:#33b5e5;"></i> You</span><span class="due-date"><i class="fa-solid fa-clock"></i> ${date}</span></div></div>`;
+            newElement.innerHTML = `<div class="card-body"><div class="row h6 justify-content-between mb-2"><div class="task-title col-11 row flex-wrap">${task.summary}</div><span class="col-1 text-center deleteBtn"><i class="fa-solid fa-xmark"></i></span></div><span class="project-name p-1">${task.project}</span><div class="row justify-content-between mt-2"><span class="assignee"><i class="fa-solid fa-circle-user" style="color:#33b5e5;"></i> You</span><span class="due-date"><i class="fa-solid fa-clock"></i> ${date}</span></div></div>`;
             document.getElementById(`${task.status}Col`).appendChild(newElement);
         }else{
             // console.log(memIndex);
