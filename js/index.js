@@ -53,15 +53,25 @@ if (manager.isLogin == false) {
     // Below function Executes on submit of login form.
     loginform.addEventListener("submit", (event) => {
         event.preventDefault(); // //stop form from submitting
-        checkUName = document.getElementById("checkuname").value;
+        checkUName = document.getElementById("checkuname");
         checkPW = document.getElementById("checkpw").value;
+        //Validation: if username is longer than 18 letters, return
+        if (checkUName.value.length > 18) {
+            alert(`Your username couldn't longer than 18 letters.`);
+            checkUName.value = "";
+            checkUName.style.backgroundColor = "LightPink";
+            checkUName.addEventListener("click", function () {
+                checkUName.style.backgroundColor = "white";
+            });
+            return;
+        }
         if (checkPW == "taskmaster") {
             // If user type in their name, use sessionStorage to store username, otherwise, store "Guest"
-            if (!checkUName) {
+            if (!checkUName.value) {
                 manager.team[0].member = "Guest";
                 manager.save();
             } else {
-                manager.team[0].member = checkUName;
+                manager.team[0].member = checkUName.value;
                 manager.save();
             }
             alert("Login successfully");
