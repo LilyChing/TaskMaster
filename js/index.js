@@ -24,7 +24,7 @@ const defaultAP = document.getElementById("defaultA");
 const teamAP = document.getElementById("teamA");
 
 // variable: overdue color
-const overdueColor = "#c99b9b";
+const overdueColor = "#FF8F8F";
 
 // create a task manager instance 
 const manager = new TaskManager();
