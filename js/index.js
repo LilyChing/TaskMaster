@@ -184,6 +184,7 @@ const editBtn = document.getElementById("editBtn");
 editBtn.addEventListener("click", event => {
     // validation omitted
     const edited = manager.getTaskById(parseInt(document.getElementById("editId").value));
+    const originalStatus = edited.status;
     // edit element in manager array
     edited.project = document.getElementById("edit-project").value;
     edited.summary = document.getElementById("edit-summary").value;
@@ -214,7 +215,9 @@ editBtn.addEventListener("click", event => {
         return object.member === edited.assignee;
     });
     editedElement.innerHTML = `<div class="card-body"><div class="row h6 justify-content-between mb-2"><div class="task-title col-11 row flex-wrap">${edited.summary}</div><span class="col-1 text-center deleteBtn"><i class="fa-solid fa-xmark"></i></span></div><span class="project-name p-1">${edited.project}</span><div class="row justify-content-between mt-2"><span class="assignee"><i class="fa-solid fa-circle-user" style="color:${manager.team[memIndex].color};"></i> ${edited.assignee}</span><span class="due-date"><i class="fa-solid fa-clock"></i> ${date}</span></div></div>`;
-    document.getElementById(`${edited.status}Col`).appendChild(editedElement);
+    if (edited.status !== originalStatus) {
+        document.getElementById(`${edited.status}Col`).appendChild(editedElement);
+    }
     
     // determine show/hide when edit under project filter
     if (document.getElementById("currentProjText").innerHTML !== "All Tasks" && document.getElementById("currentProjText").innerHTML !== edited.status) {
